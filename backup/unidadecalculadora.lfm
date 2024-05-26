@@ -1,0 +1,385 @@
+object Calculator: TCalculator
+  Left = 350
+  Height = 297
+  Top = 250
+  Width = 375
+  Align = alCustom
+  Caption = 'Calculadora'
+  ClientHeight = 297
+  ClientWidth = 375
+  object Panel1: TPanel
+    Left = 0
+    Height = 296
+    Top = 0
+    Width = 376
+    BevelColor = clBlack
+    ClientHeight = 296
+    ClientWidth = 376
+    Color = clGray
+    ParentBackground = False
+    ParentColor = False
+    TabOrder = 0
+    object CheckGroup: TGroupBox
+      Left = 16
+      Height = 33
+      Top = 80
+      Width = 57
+      Anchors = []
+      ClientHeight = 13
+      ClientWidth = 53
+      ParentBackground = False
+      TabOrder = 0
+      object Inv: TCheckBox
+        Left = 8
+        Height = 19
+        Top = -8
+        Width = 34
+        Caption = 'Inv'
+        TabOrder = 0
+      end
+    end
+    object ApagarGroup: TGroupBox
+      Left = 184
+      Height = 40
+      Top = 80
+      Width = 176
+      Anchors = []
+      ClientHeight = 20
+      ClientWidth = 172
+      ParentBackground = False
+      TabOrder = 1
+      object Backspace: TButton
+        Left = 8
+        Height = 25
+        Top = -8
+        Width = 75
+        Caption = 'Backspace'
+        TabOrder = 0
+      end
+      object C: TButton
+        Left = 88
+        Height = 25
+        Top = -8
+        Width = 75
+        Caption = 'C'
+        TabOrder = 1
+      end
+    end
+    object PrincipaisGroup: TGroupBox
+      Left = 16
+      Height = 168
+      Top = 120
+      Width = 344
+      ClientHeight = 148
+      ClientWidth = 340
+      ParentBackground = False
+      TabOrder = 2
+      object ExponencialEulerPorX: TButton
+        Left = 296
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = 'e^x'
+        TabOrder = 0
+      end
+      object Seno: TButton
+        Left = 248
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = 'sin'
+        TabOrder = 1
+      end
+      object UmSobreX: TButton
+        Left = 200
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = '1/x'
+        TabOrder = 2
+      end
+      object NFatorial: TButton
+        Left = 152
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = 'n!'
+        TabOrder = 3
+      end
+      object Logaritmo: TButton
+        Left = 104
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = 'log'
+        TabOrder = 4
+      end
+      object LogaritmoNeperial: TButton
+        Left = 56
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = 'ln'
+        TabOrder = 5
+      end
+      object Sete: TButton
+        Left = 56
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = '7'
+        TabOrder = 6
+      end
+      object Oito: TButton
+        Left = 104
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = '8'
+        TabOrder = 7
+      end
+      object Nove: TButton
+        Left = 152
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = '9'
+        TabOrder = 8
+      end
+      object Divisao: TButton
+        Left = 200
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = '/'
+        TabOrder = 9
+      end
+      object Cosseno: TButton
+        Left = 248
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = 'cos'
+        TabOrder = 10
+      end
+      object XExponencialY: TButton
+        Left = 296
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = 'x^y'
+        TabOrder = 11
+      end
+      object Quatro: TButton
+        Left = 56
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = '4'
+        TabOrder = 12
+      end
+      object Cinco: TButton
+        Left = 104
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = '5'
+        TabOrder = 13
+      end
+      object Seis: TButton
+        Left = 152
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = '6'
+        TabOrder = 14
+      end
+      object Multiplicacao: TButton
+        Left = 200
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = '*'
+        TabOrder = 15
+      end
+      object Tangente: TButton
+        Left = 248
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = 'tan'
+        TabOrder = 16
+      end
+      object XExponencial2: TButton
+        Left = 296
+        Height = 25
+        Top = 56
+        Width = 43
+        Caption = 'x^2'
+        TabOrder = 17
+      end
+      object Um: TButton
+        Left = 56
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = '1'
+        TabOrder = 18
+      end
+      object Dois: TButton
+        Left = 104
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = '2'
+        TabOrder = 19
+      end
+      object Tres: TButton
+        Left = 152
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = '3'
+        TabOrder = 20
+      end
+      object Subtracao: TButton
+        Left = 200
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = '-'
+        TabOrder = 21
+      end
+      object RaizYesimaX: TButton
+        Left = 248
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = 'x^1/y'
+        TabOrder = 22
+      end
+      object RaizQuadradaX: TButton
+        Left = 296
+        Height = 25
+        Top = 88
+        Width = 43
+        Caption = '√ x'
+        TabOrder = 23
+      end
+      object Zero: TButton
+        Left = 56
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = '0'
+        TabOrder = 24
+      end
+      object TrocaSinal: TButton
+        Left = 104
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = '+/-'
+        TabOrder = 25
+      end
+      object Virgula: TButton
+        Left = 152
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = ','
+        TabOrder = 26
+      end
+      object Adicao: TButton
+        Left = 200
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = '+'
+        TabOrder = 27
+      end
+      object Igual: TButton
+        Left = 248
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = '='
+        TabOrder = 28
+      end
+      object Pi: TButton
+        Left = 0
+        Height = 25
+        Top = 120
+        Width = 43
+        Caption = 'π'
+        TabOrder = 29
+      end
+      object AbrirParentese: TButton
+        Left = 0
+        Height = 25
+        Top = -8
+        Width = 43
+        Caption = '('
+        TabOrder = 30
+      end
+      object FecharParentese: TButton
+        Left = 0
+        Height = 25
+        Top = 24
+        Width = 43
+        Caption = ')'
+        TabOrder = 31
+      end
+    end
+    object RadioGroup: TGroupBox
+      Left = 56
+      Height = 32
+      Top = 48
+      Width = 304
+      Anchors = []
+      ClientHeight = 12
+      ClientWidth = 300
+      Color = clGray
+      ParentBackground = False
+      ParentColor = False
+      TabOrder = 3
+      object Graus: TRadioButton
+        AnchorSideLeft.Control = RadioGroup
+        AnchorSideTop.Control = RadioGroup
+        AnchorSideRight.Control = Radianos
+        AnchorSideBottom.Control = RadioGroup
+        Left = 6
+        Height = 19
+        Top = -8
+        Width = 48
+        Anchors = []
+        Caption = 'Graus'
+        TabOrder = 0
+      end
+      object Radianos: TRadioButton
+        Left = 94
+        Height = 19
+        Top = -8
+        Width = 66
+        Anchors = []
+        Caption = 'Radianos'
+        TabOrder = 1
+      end
+    end
+    object Display: TEdit
+      Left = 16
+      Height = 23
+      Top = 24
+      Width = 344
+      Alignment = taRightJustify
+      Color = clGreen
+      Font.CharSet = ANSI_CHARSET
+      Font.Height = -13
+      Font.Name = 'Times New Roman'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      TabOrder = 4
+    end
+  end
+end
