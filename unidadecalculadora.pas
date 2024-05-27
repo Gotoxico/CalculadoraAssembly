@@ -442,7 +442,7 @@ end;
 
 procedure Precedencia(operador: String): Integer;
 begin
-     if operador = 'sen' or operador = 'cos' or operador = 'tan' or operador = 'sec' or operador = 'cossec' or operador = 'cotan' or operando = 'ln'
+     if operador = 'sen' or operador = 'cos' or operador = 'tan' or operador = 'arcsen' or operador = 'arccos' or operador = 'arctan' or operando = 'ln'
         or operando = 'log' then
         begin
              Precedencia := 6;

@@ -9,6 +9,22 @@ uses
   ButtonPanel;
 
 type
+    No = record
+       caractere: Char;
+       prox: ^No;
+    end;
+
+    Lista = record
+          elementos: array[1..200] of No;
+          inicio: ^No;
+          count : Integer;
+    end;
+
+    Pilha = record
+          elementos: array[1..200] of No;
+          topo: ^No;
+          count : Integer;
+    end;
 
   { TCalculator }
 
@@ -313,8 +329,155 @@ end;
 
 procedure TCalculator.IgualClick(Sender: TObject);
 begin
+
+
+
+
 end;
 
+
+
+procedure InicializarLista(var lista: Lista);
+begin
+     inicio := nil;
+     fim := nil;
+     count := 0;
+end;
+
+procedure InicializarPilha(var pilha: Pilha);
+begin
+     topo := nil;
+     count := 0;
+end;
+
+procedure AdicionarNoLista(var lista: Lista , c: Char);
+var novoNo : ^No;
+begin
+     if lista.count < 200 then
+     begin
+          Inc(lista.count);
+          novoNo := @lista.elementos[lista.count];
+          novoNo^.caractere := c;
+          novoNo^.prox := nil;
+
+          if lista.inicio = nil then
+          begin
+               lista.inicio := novoNo;
+          end;
+          else
+          var atual : No;
+          begin
+               atual := lista^.inicio;
+               while atual <> nil do
+               begin
+                    atual := atual^.prox;
+               end;
+                    atual := novoNo;
+          end
+     end;
+end;
+
+procedure AdicionarNoPilha(var pilha: Pilha, c: Char);
+var novoNo : ^No;
+begin
+     if pilha.count < 200 then
+     begin
+          Inc(pilha.count);
+          novoNo := @pilha.elementos[pilha.count];
+          novoNo^.caractere := c;
+          novoNo^.prox := pilha.topo^;
+          pilha.topo = novoNo^;
+     end;
+end;
+
+procedure RemoverNoLista(var lista: Lista, c: Char);
+begin
+     if lista.count > 0 then
+        var atual : No;
+        begin
+             atual := lista^.inicio;
+             while atual^.prox <> nil do
+             begin
+                  atual := atual^.prox;
+             end;
+             Dec(lista.count);
+             c := atual^.caractere;
+             atual := nil;
+        end;
+end;
+
+procedure RemoverNoPilha(var pilha: Pilha, c: Char);
+begin
+     if pilha.count > 0 then
+     begin
+          Dec(pilha.count);
+          c := pilha.topo.caractere;
+          pilha.topo = pilha^topo.prox;
+     end;
+end;
+
+procedure ImprimirLista(var lista: Lista);
+var atual : No;
+begin
+     atual := lista^.inicio;
+     while atual <> nil do
+           begin
+                Write(atual^.caractere, ' ');
+                atual := atual^.prox;
+           end;
+     WriteLn;
+end;
+
+procedure ImprimirPilha(var pilha: Pilha);
+var atual : No;
+begin
+     atual := pilha^.topo;
+     while atual <> nil do
+           begin
+                Write(atual^.caractere, ' ');
+                atual := atual^.prox;
+           end;
+     WriteLn;
+end;
+
+procedure Precedencia(operador: String): Integer;
+begin
+     if operador = 'sen' or operador = 'cos' or operador = 'tan' or operador = 'sec' or operador = 'cossec' or operador = 'cotan' or operando = 'ln'
+        or operando = 'log' then
+        begin
+             Precedencia := 6;
+        end;
+
+     if operador = '!' then
+        begin
+             Precedencia := 5;
+        end;
+
+     if operador = '~' then
+        begin
+             Precedencia := 4;
+        end;
+
+     if operador = '^' or operador = '√' then
+        begin
+             Precedencia := 3;
+        end;
+
+     if operador = '*' or operador = '/' then
+        begin
+             Precedencia := 2;
+        end;
+
+     if operador = '+' or operador = '-' then
+        begin
+             Precedencia := 1;
+        end;
+end;
+
+procedure TransformarPolonesa(var pilha: Pilha, var lista: Lista, var textoTela: String);
+begin
+
+end;
 
 
 
