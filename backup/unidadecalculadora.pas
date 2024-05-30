@@ -350,7 +350,7 @@ begin
 end;
 
 procedure AdicionarNoLista(var lista: Lista ; c: Char);
-var novoNo : ^No;
+var novoNo : ^No; atual : ^No;
 begin
      if lista.count < 200 then
      begin
@@ -364,9 +364,9 @@ begin
                lista.inicio := novoNo;
           end
           else
-          var atual : No;
+
           begin
-               atual := lista^.inicio;
+               atual := lista.inicio;
                while atual <> nil do
                begin
                     atual := atual^.prox;
@@ -376,6 +376,7 @@ begin
      end;
 end;
 
+
 procedure AdicionarNoPilha(var pilha: Pilha; c: Char);
 var novoNo : ^No;
 begin
@@ -384,17 +385,18 @@ begin
           Inc(pilha.count);
           novoNo := @pilha.elementos[pilha.count];
           novoNo^.caractere := c;
-          novoNo^.prox := pilha.topo^;
-          pilha.topo = novoNo^;
+          novoNo^.prox := pilha.topo;
+          pilha.topo := novoNo;
      end;
 end;
 
 procedure RemoverNoLista(var lista: Lista; c: Char);
+var atual : ^No;
 begin
      if lista.count > 0 then
-        var atual : No;
+
         begin
-             atual := lista^.inicio;
+             atual := lista.inicio;
              while atual^.prox <> nil do
              begin
                   atual := atual^.prox;
@@ -406,19 +408,23 @@ begin
 end;
 
 procedure RemoverNoPilha(var pilha: Pilha; c: Char);
+var
+    tempNo: ^No;
 begin
-     if pilha.count > 0 then
-     begin
-          Dec(pilha.count);
-          c := pilha.topo.caractere;
-          pilha.topo = pilha^topo.prox;
-     end;
+    if pilha.count > 0 then
+    begin
+        c := pilha.topo^.caractere;
+        tempNo := pilha.topo;
+        pilha.topo := pilha.topo^.prox;
+        Dec(pilha.count);
+        { Não é necessário liberar memória explicitamente, pois a alocação é estática }
+    end;
 end;
 
 procedure ImprimirLista(var lista: Lista);
-var atual : No;
+var atual : ^No;
 begin
-     atual := lista^.inicio;
+     atual := lista.inicio;
      while atual <> nil do
            begin
                 Write(atual^.caractere, ' ');
@@ -428,9 +434,9 @@ begin
 end;
 
 procedure ImprimirPilha(var pilha: Pilha);
-var atual : No;
+var atual : ^No;
 begin
-     atual := pilha^.topo;
+     atual := pilha.topo;
      while atual <> nil do
            begin
                 Write(atual^.caractere, ' ');
@@ -439,43 +445,58 @@ begin
      WriteLn;
 end;
 
-procedure Precedencia(operador: String): Integer;
+function Precedencia(operador: String): Integer;
 begin
-     if operador = 'sen' or operador = 'cos' or operador = 'tan' or operador = 'arcsen' or operador = 'arccos' or operador = 'arctan' or operando = 'ln'
-        or operando = 'log' then
-        begin
-             Precedencia := 6;
-        end;
-
-     if operador = '!' then
-        begin
-             Precedencia := 5;
-        end;
-
-     if operador = '~' then
-        begin
-             Precedencia := 4;
-        end;
-
-     if operador = '^' or operador = '√' then
-        begin
-             Precedencia := 3;
-        end;
-
-     if operador = '*' or operador = '/' then
-        begin
-             Precedencia := 2;
-        end;
-
-     if operador = '+' or operador = '-' then
-        begin
-             Precedencia := 1;
-        end;
+    if (operador = 'sen') or (operador = 'cos') or (operador = 'tan') or
+       (operador = 'arcsen') or (operador = 'arccos') or (operador = 'arctan') or
+       (operador = 'ln') or (operador = 'log') then
+    begin
+        Precedencia := 6;
+    end
+    else if operador = '!' then
+    begin
+        Precedencia := 5;
+    end
+    else if operador = '~' then
+    begin
+        Precedencia := 4;
+    end
+    else if (operador = '^') or (operador = '√') then
+    begin
+        Precedencia := 3;
+    end
+    else if (operador = '*') or (operador = '/') then
+    begin
+        Precedencia := 2;
+    end
+    else if (operador = '+') or (operador = '-') then
+    begin
+        Precedencia := 1;
+    end
+    else
+    begin
+        Precedencia := 0;  // Valor padrão para operadores desconhecidos
+    end;
 end;
+
 
 procedure TransformarPolonesa(var pilha: Pilha; var lista: Lista; var textoTela: String);
 begin
 
+end;
+
+function Soma(a, b: real): real;
+var
+    result: real;
+begin
+    {$ASMMODE intel}
+    asm
+        fld a           // Carrega a no topo da pilha
+        fld b
+        fadd           // Adiciona b ao valor no topo da pilha
+        fstp result     // Armazena o resultado em result e desempilha
+    end;
+    Soma := result;
 end;
 
 
