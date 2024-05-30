@@ -22,30 +22,14 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnidadeCalculadora"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="449"/>
-        <CursorPos X="6" Y="479"/>
+        <TopLine Value="356"/>
+        <CursorPos X="23" Y="367"/>
         <UsageCount Value="28"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="28">
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="134" TopLine="98"/>
-      </Position>
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="140" TopLine="106"/>
-      </Position>
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="146" TopLine="114"/>
-      </Position>
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="151" Column="8" TopLine="120"/>
-      </Position>
+    <JumpHistory HistoryIndex="29">
       <Position>
         <Filename Value="unidadecalculadora.pas"/>
         <Caret Line="158" TopLine="122"/>
@@ -145,6 +129,26 @@
       <Position>
         <Filename Value="unidadecalculadora.pas"/>
         <Caret Line="301" Column="6" TopLine="281"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="445" Column="133" TopLine="433"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="349" Column="11" TopLine="327"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="352" TopLine="342"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="476" Column="66" TopLine="463"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="365" Column="14" TopLine="355"/>
       </Position>
     </JumpHistory>
     <RunParams>

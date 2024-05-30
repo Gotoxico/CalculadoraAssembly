@@ -339,18 +339,17 @@ end;
 
 procedure InicializarLista(var lista: Lista);
 begin
-     inicio := nil;
-     fim := nil;
-     count := 0;
+     lista.inicio := nil;
+     lista.count := 0;
 end;
 
 procedure InicializarPilha(var pilha: Pilha);
 begin
-     topo := nil;
-     count := 0;
+     pilha.topo := nil;
+     pilha.count := 0;
 end;
 
-procedure AdicionarNoLista(var lista: Lista , c: Char);
+procedure AdicionarNoLista(var lista: Lista ; c: Char);
 var novoNo : ^No;
 begin
      if lista.count < 200 then
@@ -363,9 +362,9 @@ begin
           if lista.inicio = nil then
           begin
                lista.inicio := novoNo;
-          end;
+          end
           else
-          var atual : No;
+          var atual := No;
           begin
                atual := lista^.inicio;
                while atual <> nil do
@@ -377,7 +376,7 @@ begin
      end;
 end;
 
-procedure AdicionarNoPilha(var pilha: Pilha, c: Char);
+procedure AdicionarNoPilha(var pilha: Pilha; c: Char);
 var novoNo : ^No;
 begin
      if pilha.count < 200 then
@@ -390,7 +389,7 @@ begin
      end;
 end;
 
-procedure RemoverNoLista(var lista: Lista, c: Char);
+procedure RemoverNoLista(var lista: Lista; c: Char);
 begin
      if lista.count > 0 then
         var atual : No;
@@ -406,7 +405,7 @@ begin
         end;
 end;
 
-procedure RemoverNoPilha(var pilha: Pilha, c: Char);
+procedure RemoverNoPilha(var pilha: Pilha; c: Char);
 begin
      if pilha.count > 0 then
      begin
@@ -474,7 +473,7 @@ begin
         end;
 end;
 
-procedure TransformarPolonesa(var pilha: Pilha, var lista: Lista, var textoTela: String);
+procedure TransformarPolonesa(var pilha: Pilha; var lista: Lista; var textoTela: String);
 begin
 
 end;
