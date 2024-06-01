@@ -480,25 +480,38 @@ begin
 end;
 
 
-procedure TransformarPolonesa(var pilha: Pilha; var lista: Lista; var textoTela: String);
+procedure TransformarPolonesa( pilha: Pilha;  lista: Lista;  textoTela: String);
 begin
 
 end;
 
 function Soma(a, b: real): real;
-var
-    result: real;
 begin
     {$ASMMODE intel}
     asm
         fld a           // Carrega a no topo da pilha
-        fld b
-        fadd           // Adiciona b ao valor no topo da pilha
+        fld b           // Carrega o topo da pilha com b
+        fadd st(0), st(1)        // Adiciona b ao valor no topo da pilha
         fstp result     // Armazena o resultado em result e desempilha
     end;
-    Soma := result;
+    Soma:= result;
 end;
 
+function Multiplicar(a, b : real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       fld a
+       fld b
+       fmul st(0), st(1)
+       fstp result
+    end;
+    Multiplicar:= result;
+end;
+function UmSobreX(a : real) : real;
+begin
+
+end;
 
 
 
