@@ -510,12 +510,61 @@ begin
 end;
 function UmSobreX(a : real) : real;
 begin
+    {$ASMMODE intel}
+    asm
+       fld a
+       fld1
+       fdiv st, st(1)
+       fstp result
+    end;
+    UmSobreX := result;
+end;
+function EulerAX(x : real) : real;
+var
+    euler: real;
+begin
+    euler:= 2.71828;
+    {$ASMMODE intel}
+    asm
+       fld x
+       fld euler
+       fyl2x
+       fld st
+       frndint
+       fsub st(1), st
+       fxch
+       f2xm1
+       fld1
+       faddp st(1), st
+       fscale
+       fstp result
+    end;
+
+    EulerAX := result;
 
 end;
 
-
-
-
+ function Potencia2(x : real) : real;
+ var
+     expoente : real;
+ begin
+     expoente := 2;
+     {$ASMMODE intel}
+     asm
+        fld x
+        fld expoente
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        f2xml
+        fld1
+        faddp st(1), st
+        fscale
+        fst result
+     end;
+         Potencia2 := result;
+ end;
 
 
 
