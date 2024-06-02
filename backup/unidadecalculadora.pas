@@ -111,6 +111,7 @@ type
     procedure XExponencialYClick(Sender: TObject);
     procedure ZeroClick(Sender: TObject);
   private
+    flagInv: Boolean;
 
   public
 
@@ -142,7 +143,21 @@ end;
 
 procedure TCalculator.InvChange(Sender: TObject);
 begin
+    flagInv := not flagInv;
 
+    if(flagInv) then
+    begin
+        Seno.Caption := 'arcsen';
+        Cosseno.Caption := 'arccos;
+        Tangente.Caption := 'arctan';
+    end
+
+    else
+    begin
+        Seno.Caption := 'sen';
+        Cosseno.Caption := 'cos';
+        Tangente.Caption := 'tan';
+    end;
 end;
 
 procedure TCalculator.BackspaceClick(Sender: TObject);
@@ -194,14 +209,19 @@ end;
 
 procedure TCalculator.SenoClick(Sender: TObject);
 begin
-     Display.text := Display.text + 'sen(';
-
+     if(flagInv) then
+     begin
+         Display.text := Display.text + 'arcsen(';
+     end
+     else
+     begin
+         Display.text := Display.text + 'sen(';
+     end;
 end;
 
 procedure TCalculator.ExponencialEulerPorXClick(Sender: TObject);
 begin
      Display.text := Display.text + 'e^(';
-
 end;
 
 procedure TCalculator.FecharParenteseClick(Sender: TObject);
@@ -234,7 +254,14 @@ end;
 
 procedure TCalculator.CossenoClick(Sender: TObject);
 begin
-     Display.text := Display.text + 'cos(';
+     if(flagInv) then
+     begin
+         Display.text := Display.text + 'arccos(';
+     end
+     else
+     begin
+         Display.text := Display.text + 'cos(';
+     end;
 end;
 
 procedure TCalculator.XExponencialYClick(Sender: TObject);
@@ -264,7 +291,14 @@ end;
 
 procedure TCalculator.TangenteClick(Sender: TObject);
 begin
-     Display.text := Display.text + 'tan(';
+     if(flagInv) then
+     begin
+         Display.text := Display.text + 'arctan(';
+     end
+     else
+     begin
+         Display.text := Display.text + 'tan(';
+     end;
 end;
 
 procedure TCalculator.XExponencial2Click(Sender: TObject);
@@ -352,7 +386,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao seno}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'cos') then
         begin
@@ -361,7 +395,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao cosseno}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'tan') then
         begin
@@ -370,7 +404,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao tangente}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'arcsen') then
         begin
@@ -379,7 +413,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao arco-seno}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'arccos') then
         begin
@@ -388,7 +422,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao arco-cosseno}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'arco-tangente') then
         begin
@@ -397,7 +431,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao arco-tangente}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'ln') then
         begin
@@ -406,7 +440,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao logaritmo-neperiano}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = 'log') then
         begin
@@ -415,7 +449,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao logaritmo}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '!') then
         begin
@@ -424,7 +458,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao fatorial}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '~') then
         begin
@@ -433,7 +467,7 @@ begin
             operador := StrToFloat(retiradoPilha);
             {Funcao troca-sinal}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '^') then
         begin
@@ -444,7 +478,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '√') then
         begin
@@ -455,7 +489,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao raiz}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '*') then
         begin
@@ -466,7 +500,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao multiplicacao}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '/') then
         begin
@@ -477,7 +511,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao divisao}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if (atual^.caractere = '+') then
         begin
@@ -488,7 +522,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao soma}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else if(atual^.caractere = '-') then
         begin
@@ -499,7 +533,7 @@ begin
             operador2 := StrToFloat(retiradoPilha2);
             {Funcao subtracao}
             {AdicionarNoPilha(pilha, );}
-        end.
+        end
 
         else
         begin
@@ -541,8 +575,8 @@ begin
           begin
                lista.inicio := novoNo;
           end
-          else
 
+          else
           begin
                atual := lista.inicio;
                while atual <> nil do
@@ -550,7 +584,7 @@ begin
                     atual := atual^.prox;
                end;
                     atual := novoNo;
-          end
+          end;
      end;
 end;
 
@@ -639,26 +673,32 @@ begin
     begin
         Precedencia := 6;
     end
+
     else if operador = '!' then
     begin
         Precedencia := 5;
     end
+
     else if operador = '~' then
     begin
         Precedencia := 4;
     end
+
     else if (operador = '^') or (operador = '√') then
     begin
         Precedencia := 3;
     end
+
     else if (operador = '*') or (operador = '/') then
     begin
         Precedencia := 2;
     end
+
     else if (operador = '+') or (operador = '-') then
     begin
         Precedencia := 1;
     end
+
     else
     begin
         Precedencia := 0;  // Valor padrão para operadores desconhecidos
@@ -710,7 +750,7 @@ begin
             end;
             caracteres := operandos;
             flagNumero := true;
-        end.
+        end
 
         {Caso seja um dos outros operadores ou parenteses}
         else
@@ -725,7 +765,7 @@ begin
         if(flagNumero = true) then
         begin
             AdicionarNoLista(lista, caracteres);
-        end.
+        end
         {Se o caractere for um abre parenteses, adicionar na Pilha}
         else
         begin
@@ -758,8 +798,8 @@ begin
                          AdicionarNoLista(lista, retiradoPilha);
                     end
                     AdicionarNoPilha(pilha, caracteres);
-                end
-            end
+                end;
+            end;
         end;
     end;
 
