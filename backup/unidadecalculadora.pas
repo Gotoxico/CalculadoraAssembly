@@ -112,6 +112,7 @@ type
     procedure ZeroClick(Sender: TObject);
   private
     flagInv: Boolean;
+    flagGraus: Boolean;
 
   public
 
@@ -128,7 +129,7 @@ implementation
 
 procedure TCalculator.DisplayChange(Sender: TObject);
 begin
-
+    flagGraus := not flagGraus;
 end;
 
 procedure TCalculator.GrausChange(Sender: TObject);
@@ -544,7 +545,16 @@ begin
     end;
 
     {Exibindo Resultado Display}
-    Display.text := ImprimirPilha(pilha);
+    if(flagGraus) then
+    begin
+        Display.text := FloatToString((180/pi)*StrToFloat(ImprimirPilha(pilha)));
+    end
+
+    else
+    begin
+        Display.text := ImprimirPilha(pilha);
+    end;
+
 end;
 
 {Procedimentos Lista e Pilha}

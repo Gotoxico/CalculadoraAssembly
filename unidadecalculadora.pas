@@ -129,12 +129,11 @@ implementation
 
 procedure TCalculator.DisplayChange(Sender: TObject);
 begin
-    flagGraus := not flagGraus;
 end;
 
 procedure TCalculator.GrausChange(Sender: TObject);
 begin
-
+    flagGraus := not flagGraus;
 end;
 
 procedure TCalculator.RadianosChange(Sender: TObject);
