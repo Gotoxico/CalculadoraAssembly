@@ -7,7 +7,6 @@ object Calculator: TCalculator
   Caption = 'Calculadora'
   ClientHeight = 297
   ClientWidth = 375
-  LCLVersion = '3.2.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 296

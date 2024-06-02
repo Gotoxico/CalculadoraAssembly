@@ -9,21 +9,22 @@ uses
   ButtonPanel;
 
 type
+    PNo = ^No;
     No = record
        caracteres: String;
-       prox: ^No;
+       prox: PNo;
     end;
 
     Lista = record
-          elementos: array[1..200] of No;
-          inicio: ^No;
-          count : Integer;
+          elementos: array[1..200] of PNo;
+          inicio: Pno;
+          count: Integer;
     end;
 
     Pilha = record
-          elementos: array[1..200] of No;
-          topo: ^No;
-          count : Integer;
+          elementos: array[1..200] of PNo;
+          topo: Pno;
+          count: Integer;
     end;
 
   { TCalculator }
@@ -148,7 +149,7 @@ begin
     if(flagInv) then
     begin
         Seno.Caption := 'arcsen';
-        Cosseno.Caption := 'arccos;
+        Cosseno.Caption := 'arccos';
         Tangente.Caption := 'arctan';
     end
 
@@ -361,201 +362,6 @@ begin
      Display.text := Display.text + '+';
 end;
 
-{Procedimento Principal Para a Realizacao dos Calculos}
-
-procedure TCalculator.IgualClick(Sender: TObject);
-var lista: Lista;
-    pilha: Pilha;
-    anterior, atual: ^No;
-    retiradoLista, retiradoPilha, retiradoPilha2: String;
-    operador, operador2: Real;
-begin
-    InicializarLista(lista);
-    InicializarPilha(pilha);
-    TransformarPolonesa(pilha, lista, Display.text);
-
-    anterior := nil;
-    atual := lista.inicio;
-
-    while(atual <> nil) do
-    begin
-        if(atual^.caractere = 'sen') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao seno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'cos') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao cosseno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'tan') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao tangente}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'arcsen') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao arco-seno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'arccos') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao arco-cosseno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'arco-tangente') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao arco-tangente}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'ln') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao logaritmo-neperiano}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = 'log') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao logaritmo}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '!') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao fatorial}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '~') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            operador := StrToFloat(retiradoPilha);
-            {Funcao troca-sinal}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '^') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao exponencial}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '√') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao raiz}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '*') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao multiplicacao}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '/') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao divisao}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if (atual^.caractere = '+') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao soma}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(atual^.caractere = '-') then
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            RemoverNoPilha(pilha, retiradoPilha);
-            RemoverNoPilha(pilha, retiradoPilha2);
-            operador := StrToFloat(retiradoPilha);
-            operador2 := StrToFloat(retiradoPilha2);
-            {Funcao subtracao}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else
-        begin
-            RemoverNoLista(lista, retiradoLista);
-            AdicionarNoPilha(pilha, retiradoLista);
-
-        end;
-    end;
-
-    {Exibindo Resultado Display}
-    if(flagGraus) then
-    begin
-        Display.text := FloatToString((180/pi)*StrToFloat(ImprimirPilha(pilha)));
-    end
-
-    else
-    begin
-        Display.text := ImprimirPilha(pilha);
-    end;
-
-end;
-
 {Procedimentos Lista e Pilha}
 
 procedure InicializarLista(var lista: Lista);
@@ -611,7 +417,7 @@ begin
      end;
 end;
 
-procedure RemoverNoLista(var lista: Lista; c: String);
+procedure RemoverNoLista(var lista: Lista; var c: String);
 var atual : ^No;
 begin
      if lista.count > 0 then
@@ -628,7 +434,7 @@ begin
         end;
 end;
 
-procedure RemoverNoPilha(var pilha: Pilha; c: String);
+procedure RemoverNoPilha(var pilha: Pilha; var c: String);
 var
     tempNo: ^No;
 begin
@@ -642,7 +448,7 @@ begin
     end;
 end;
 
-procedure ImprimirLista(var lista: Lista);
+procedure ImprimirLista(lista: Lista);
 var atual: ^No;
 begin
      atual := lista.inicio;
@@ -654,7 +460,7 @@ begin
      WriteLn;
 end;
 
-function ImprimirPilha(var pilha: Pilha): String;
+function ImprimirPilha(pilha: Pilha): String;
 var atual: ^No;
     resultado: String;
 begin
@@ -667,7 +473,7 @@ begin
      ImprimirPilha := resultado;
 end;
 
-function TamanhoPilha(var pilha: Pilha): Integer;
+function TamanhoPilha(pilha: Pilha): Integer;
 begin
     TamanhoPilha := pilha.count;
 end;
@@ -715,7 +521,7 @@ begin
 end;
 
 
-procedure TransformarPolonesa(var pilha: Pilha;  lista: Lista;  textoTela: String);
+procedure TransformarPolonesa(var pilha: Pilha; var lista: Lista; textoTela: String);
 var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i: Integer;
@@ -723,19 +529,21 @@ var
 begin
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
+    i := 1;
 
-    for i:= 0 to tamanhoTextoTela do
+    while i <= tamanhoTextoTela do
     begin
-        indexFuncoesEspeciais := 0;
-        indexOperandos := 0;
+        indexFuncoesEspeciais := 1;
+        indexOperandos := 1;
         flagNumero := false;
         {Caso seja ln, log, seno, cosseno, tangente, arco-seno, arco-cosseno e
         arco-tangente}
         if(textoTela[i] = 'l') or (textoTela[i] = 's') or (textoTela[i] = 'c')
            or (textoTela[i] = 't') or (textoTela[i] = 'a') then
         begin
-            while(textoTela[i] <> '(') do
+            while(i <= tamanhoTextoTela) and (textoTela[i] <> '(') do
             begin
+                SetLength(funcoesEspeciais, indexFuncoesEspeciais);
                 funcoesEspeciais[indexFuncoesEspeciais] := textoTela[i];
                 Inc(i);
                 Inc(indexFuncoesEspeciais);
@@ -753,6 +561,7 @@ begin
             and (textoTela[i] <> '*') and (textoTela[i] <> '/') and (textoTela[i] <> '^')
             and (textoTela[i] <> '!') and (textoTela[i] <> '~') and (textoTela[i] <> '√') do
             begin
+                SetLength(operandos, indexOperandos);
                 operandos[indexOperandos] := textoTela[i];
                 Inc(i);
                 Inc(indexOperandos);
@@ -788,12 +597,12 @@ begin
             begin
                 if (caracteres = ')') then
                 begin
-                    dec(parenteses);
+                    Dec(parenteses);
                     while (TamanhoPilha(pilha) > 0) and (pilha.topo^.caracteres <> '(') do
                     begin
                         RemoverNoPilha(pilha, retiradoPilha);
                         AdicionarNoLista(lista, retiradoPilha);
-                    end
+                    end;
                     {Remover o fecha parenteses da Pilha}
                     RemoverNoPilha(pilha, retiradoPilha);
                 end
@@ -801,11 +610,11 @@ begin
                 e talvez remover}
                 else
                 begin
-                    while (TamanhoPilha(pilha) > 0) and (Precedencia(caracteres) <= Precedencia(pilha.topo^.caracteres)) then
+                    while (TamanhoPilha(pilha) > 0) and (Precedencia(caracteres) <= Precedencia(pilha.topo^.caracteres)) do
                     begin
                          RemoverNoPilha(pilha, retiradoPilha);
                          AdicionarNoLista(lista, retiradoPilha);
-                    end
+                    end;
                     AdicionarNoPilha(pilha, caracteres);
                 end;
             end;
@@ -815,12 +624,211 @@ begin
     {Ao acabar de ler o textoTela, esvaziar Pilha e colocar na Lista}
     while TamanhoPilha(pilha) > 0 do
     begin
-        RetirarNoPilha(pilha, retiradoPilha);
+        RemoverNoPilha(pilha, retiradoPilha);
         AdicionarNoLista(lista, retiradoPilha);
     end;
 
     {Encontrar Metodo Para Avisar Quantidade Impar de Parenteses}
 end;
+
+{Procedimento Principal Para a Realizacao dos Calculos}
+
+procedure TCalculator.IgualClick(Sender: TObject);
+var lista: Lista;
+    pilha: Pilha;
+    anterior, atual: PNo;
+    retiradoLista, retiradoPilha, retiradoPilha2: String;
+    operador, operador2: Real;
+begin
+    InicializarLista(lista);
+    InicializarPilha(pilha);
+    TransformarPolonesa(pilha, lista, Display.text);
+
+    anterior := nil;
+    atual := lista.inicio;
+
+    while(atual <> nil) do
+    begin
+        if(atual^.caracteres = 'sen') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao seno}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'cos') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao cosseno}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'tan') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao tangente}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'arcsen') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao arco-seno}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'arccos') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao arco-cosseno}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'arco-tangente') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao arco-tangente}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'ln') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao logaritmo-neperiano}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = 'log') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao logaritmo}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '!') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao fatorial}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '~') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            operador := StrToFloat(retiradoPilha);
+            {Funcao troca-sinal}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '^') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao exponencial}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '√') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao raiz}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '*') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao multiplicacao}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '/') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao divisao}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if (atual^.caracteres = '+') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao soma}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else if(atual^.caracteres = '-') then
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            RemoverNoPilha(pilha, retiradoPilha);
+            RemoverNoPilha(pilha, retiradoPilha2);
+            operador := StrToFloat(retiradoPilha);
+            operador2 := StrToFloat(retiradoPilha2);
+            {Funcao subtracao}
+            {AdicionarNoPilha(pilha, );}
+        end
+
+        else
+        begin
+            RemoverNoLista(lista, retiradoLista);
+            AdicionarNoPilha(pilha, retiradoLista);
+
+        end;
+    end;
+
+    {Exibindo Resultado Display}
+    if(flagGraus) then
+    begin
+        Display.text := FloatToStr((180/pi)*StrToFloat(ImprimirPilha(pilha)));
+    end
+
+    else
+    begin
+        Display.text := ImprimirPilha(pilha);
+    end;
+
+end;
+
+
+
+
 
 {Procedimentos Calculo}
 
@@ -905,18 +913,4 @@ end;
          Potencia2 := result;
  end;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-end.
 
