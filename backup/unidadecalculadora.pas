@@ -350,15 +350,17 @@ end;
 {Procedimentos Calculo}
 
 function Soma(a, b: real): real;
+var res : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
         fld a           // Carrega a no topo da pilha
         fld b           // Carrega o topo da pilha com b
         fadd st(0), st(1)        // Adiciona b ao valor no topo da pilha
-        fstp result     // Armazena o resultado em result e desempilha
+        fstp res     // Armazena o resultado em result e desempilha
     end;
-    Soma:= result;
+    Soma:= res;
 end;
 
 function Multiplicar(a, b : real) : real;
@@ -370,7 +372,7 @@ begin
        fmul st(0), st(1)
        fstp result
     end;
-    Multiplicar:= result;
+
 end;
 function UmSobreX(a : real) : real;
 begin
@@ -429,6 +431,80 @@ end;
      end;
          Potencia2 := result;
  end;
+function SinRadianos(x : real) : real;
+begin
+     {$ASMMODE intel}
+     asm
+        fld x
+        fsin
+        fst result
+     end;
+     SinRadianos := result
+end;
+function CosRadianos(x :real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       fld x
+       fcos
+       fst Result
+    end;
+    CosRadianos := Result;
+end;
+function TanRadianos(x : real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       fld x
+       fsincos
+       fdiv
+       fst Result
+    end;
+    TanRadianos := Result;
+end;
+function arcTan( x: real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       fld x
+       fpatan
+       fstp Result
+    end;
+
+end;
+function PotenciaXY(x: real ; y: real) : real;
+begin
+     {$ASMMODE intel}
+     asm
+        fld y
+        fld x
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        f2xm1
+        fld1
+        faddp st(1), st
+        fscale
+        fst result
+     end;
+
+end;
+function Raiz2deX (x : real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       finit
+       fld x
+       fsqrt
+       fstp Result
+    end;
+    Raiz2deX := Result;
+end;
+function RaizYdeX( x : real; y : real  ) : real;
+begin
+
+end;
 
 {Procedimentos Polonesa}
 
@@ -758,6 +834,9 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao multiplicacao}
+            resultado := Multiplicar(operando, operando2);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -785,8 +864,9 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
+            resultado:= (Soma(operando, operando2));
             {Funcao soma}
-            pilha[indexPilha] := FloatToStr(Soma(operando, operando2));
+            pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
         end
 
@@ -801,6 +881,7 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao subtracao}
+            resultado:= (Soma(operando, operando2));
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -816,13 +897,15 @@ begin
     {Exibindo Resultado Display}
     if(flagGraus) then
     begin
-        resultado := (180/3.14)*StrToFloat(pilha[indexPilha]);
+        resultado := (180/3.14)*StrToFloat(pilha[indexPilha-1]);
         Display.text := FloatToStr(resultado);
     end
 
     else
     begin
-        Display.text := pilha[indexPilha];
+        retiradoPilha := pilha[indexPilha - 1];
+        Display.text := retiradoPilha;
+        //Display.text := FloatToStr(resultado);
     end;
 
 end;
