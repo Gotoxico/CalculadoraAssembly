@@ -679,8 +679,8 @@ var pilha, lista: TArrayString;
     operando, operando2, resultado: Real;
     indexLista, indexPilha: Integer;
 begin
+    TransformarPolonesa(pilha, lista, Display.text);
 
-    Display.text := TransformarPolonesa(pilha, lista, Display.text);
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
@@ -694,6 +694,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao seno}
+            resultado := SinRadianos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -904,9 +905,9 @@ begin
 
     else
     begin
-        retiradoPilha := pilha[indexPilha - 1];
-        Display.text := retiradoPilha;
-        //Display.text := FloatToStr(resultado);
+        //retiradoPilha := pilha[indexPilha - 1];
+        //Display.text := retiradoPilha;
+        Display.text := FloatToStr(resultado);
     end;
 
 end;
