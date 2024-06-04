@@ -22,20 +22,20 @@ object Calculator: TCalculator
     ParentColor = False
     TabOrder = 0
     object CheckGroup: TGroupBox
-      Left = 14
+      Left = 20
       Height = 41
-      Top = 61
+      Top = 80
       Width = 71
       Anchors = []
-      ClientHeight = 21
+      ClientHeight = 16
       ClientWidth = 67
       ParentBackground = False
       TabOrder = 0
       object Inv: TCheckBox
         Left = 16
-        Height = 19
+        Height = 24
         Top = -10
-        Width = 34
+        Width = 40
         Caption = 'Inv'
         TabOrder = 0
         OnChange = InvChange
@@ -44,10 +44,10 @@ object Calculator: TCalculator
     object ApagarGroup: TGroupBox
       Left = 130
       Height = 50
-      Top = 60
+      Top = 80
       Width = 220
       Anchors = []
-      ClientHeight = 30
+      ClientHeight = 25
       ClientWidth = 216
       ParentBackground = False
       TabOrder = 1
@@ -75,7 +75,7 @@ object Calculator: TCalculator
       Height = 210
       Top = 150
       Width = 430
-      ClientHeight = 190
+      ClientHeight = 185
       ClientWidth = 426
       ParentBackground = False
       TabOrder = 2
@@ -369,12 +369,12 @@ object Calculator: TCalculator
       end
     end
     object RadioGroup: TGroupBox
-      Left = 14
+      Left = 20
       Height = 40
-      Top = 35
+      Top = 48
       Width = 380
       Anchors = []
-      ClientHeight = 20
+      ClientHeight = 15
       ClientWidth = 376
       Color = clGray
       ParentBackground = False
@@ -386,19 +386,19 @@ object Calculator: TCalculator
         AnchorSideRight.Control = Radianos
         AnchorSideBottom.Control = RadioGroup
         Left = 0
-        Height = 19
-        Top = -8
-        Width = 48
+        Height = 24
+        Top = -11
+        Width = 58
         Anchors = []
         Caption = 'Graus'
         TabOrder = 0
         OnChange = GrausChange
       end
       object Radianos: TRadioButton
-        Left = 68
-        Height = 19
-        Top = -8
-        Width = 66
+        Left = 64
+        Height = 24
+        Top = -11
+        Width = 82
         Anchors = []
         Caption = 'Radianos'
         TabOrder = 1
@@ -407,7 +407,7 @@ object Calculator: TCalculator
     end
     object Display: TEdit
       Left = 20
-      Height = 23
+      Height = 27
       Top = 30
       Width = 430
       Alignment = taRightJustify
