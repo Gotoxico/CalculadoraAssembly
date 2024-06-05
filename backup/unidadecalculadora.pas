@@ -719,8 +719,7 @@ begin
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
-
-    while indexLista <= High(lista) do
+    while indexLista <= 200 do
     begin
         if(lista[indexLista] = 'sen') then
         begin
