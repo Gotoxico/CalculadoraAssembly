@@ -619,20 +619,11 @@ begin
         begin
             while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') or (textoTela[i] = ',') do
             begin
-                if textoTela[i] <> ',' then
-                begin
+
                      SetLength(operandos, indexOperandos);
                      operandos[indexOperandos] := textoTela[i];
                      Inc(i);
                      Inc(indexOperandos);
-                end
-                else
-                begin
-                     SetLength(operandos, indexOperandos);
-                     operandos[indexOperandos] := '.';
-                     Inc(i);
-                     Inc(indexOperandos);
-                end;
 
             end;
             caracteres := operandos;
@@ -730,6 +721,7 @@ begin
 
     indexLista := Low(lista);
     indexPilha := Low(pilha);
+
 
 
     while indexLista <= High(lista) do
