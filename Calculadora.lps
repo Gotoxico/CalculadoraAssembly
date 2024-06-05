@@ -9,7 +9,7 @@
         <Filename Value="Calculadora.lpr"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="61"/>
+        <UsageCount Value="65"/>
       </Unit>
       <Unit>
         <Filename Value="unidadecalculadora.pas"/>
@@ -19,9 +19,9 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnidadeCalculadora"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="465"/>
-        <CursorPos X="5" Y="385"/>
-        <UsageCount Value="61"/>
+        <TopLine Value="545"/>
+        <CursorPos X="34" Y="553"/>
+        <UsageCount Value="65"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
       </Unit>
@@ -42,11 +42,11 @@
         <EditorIndex Value="1"/>
         <TopLine Value="184"/>
         <CursorPos X="10" Y="196"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
       </Unit>
     </Units>
-    <JumpHistory HistoryIndex="21">
+    <JumpHistory HistoryIndex="24">
       <Position>
         <Filename Value="unidadecalculadora.pas"/>
         <Caret Line="620" Column="13" TopLine="275"/>
@@ -101,14 +101,6 @@
       </Position>
       <Position>
         <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="165" Column="24" TopLine="202"/>
-      </Position>
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
-        <Caret Line="277" Column="6" TopLine="673"/>
-      </Position>
-      <Position>
-        <Filename Value="unidadecalculadora.pas"/>
         <Caret Line="742" Column="43" TopLine="729"/>
       </Position>
       <Position>
@@ -134,6 +126,26 @@
       <Position>
         <Filename Value="unidadecalculadora.pas"/>
         <Caret Line="602" Column="62" TopLine="589"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="967" Column="2" TopLine="949"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="594" Column="9" TopLine="585"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="596" Column="9" TopLine="587"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="586" Column="15" TopLine="575"/>
+      </Position>
+      <Position>
+        <Filename Value="unidadecalculadora.pas"/>
+        <Caret Line="600" Column="5" TopLine="590"/>
       </Position>
     </JumpHistory>
     <RunParams>

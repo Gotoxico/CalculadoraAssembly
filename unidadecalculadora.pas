@@ -501,9 +501,10 @@ begin
         fld st
         frndint
         fsub st(1), st
+        fxch
         f2xm1
         fld1
-        faddp st(1), st
+        fadd
         fscale
         fst result
      end;
@@ -551,7 +552,7 @@ begin
 
     else if operador = '~' then
     begin
-        Precedencia := 9;
+        Precedencia := 4;
     end
 
     else if (operador = '^') or (operador = '√') then
@@ -581,12 +582,16 @@ var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i, indexPilha, indexLista: Integer;
     flagNumero: Boolean;
+    pi : real;
 begin
+    caracteres:= '';
+    pi := 3.14159265358979323846;
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
     indexPilha := 1;
     indexLista := 1;
+
 
     while i <= tamanhoTextoTela do
     begin
@@ -624,7 +629,8 @@ begin
         end
         else if textoTela[i] = 'π' then
            begin
-                caracteres := '3.14';
+
+                caracteres := FloatToStr(pi);
                 Inc(i);
                 flagNumero := true;
            end
@@ -856,9 +862,7 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
-            //if operando = 2 then
-            //begin
-            //    resultado:=
+            resultado := PotenciaXY(operando2, operando);
             //{AdicionarNoPilha(pilha, );}
 
             end

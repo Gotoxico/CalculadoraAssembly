@@ -383,19 +383,12 @@ begin
        fstp result
     end;
 end;
-function sinGraus(x: real) : real;
-begin
-    {$ASMMODE intel}
-    asm
-       finit
-       fld x
-    end;
-end;
 
 function UmSobreX(a : real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld a
        fld1
        fdiv st, st(1)
@@ -409,6 +402,7 @@ begin
     euler:= 2.71828;
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fld euler
        fyl2x
@@ -441,6 +435,7 @@ end;
      expoente := 2;
      {$ASMMODE intel}
      asm
+        finit
         fld x
         fld expoente
         fyl2x
@@ -468,6 +463,7 @@ function CosRadianos(x :real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fcos
        fst Result
@@ -477,6 +473,7 @@ function TanRadianos(x : real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fsincos
        fdiv
@@ -487,6 +484,7 @@ function arcTan( x: real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fpatan
        fstp Result
@@ -496,15 +494,17 @@ function PotenciaXY(x: real ; y: real) : real;
 begin
      {$ASMMODE intel}
      asm
+        finit
         fld y
         fld x
         fyl2x
         fld st
         frndint
         fsub st(1), st
+        fxch
         f2xm1
         fld1
-        faddp st(1), st
+        fadd
         fscale
         fst result
      end;
@@ -582,12 +582,16 @@ var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i, indexPilha, indexLista: Integer;
     flagNumero: Boolean;
+    pi : real;
 begin
+    caracteres:= '';
+    pi := 3.14159265358979323846;
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
     indexPilha := 1;
     indexLista := 1;
+
 
     while i <= tamanhoTextoTela do
     begin
@@ -625,7 +629,8 @@ begin
         end
         else if textoTela[i] = 'π' then
            begin
-                caracteres := '3.14';
+
+                caracteres := FloatToStr(pi);
                 Inc(i);
                 flagNumero := true;
            end
@@ -857,9 +862,7 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
-            //if operando = 2 then
-            //begin
-            //    resultado:=
+            resultado := PotenciaXY(operando2, operando);
             //{AdicionarNoPilha(pilha, );}
 
             end
