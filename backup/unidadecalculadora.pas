@@ -435,8 +435,8 @@ begin
      {$ASMMODE intel}
      asm
         finit
-        fld x
         fld y
+        fld x
         fdiv
         fstp result
      end;
@@ -531,12 +531,13 @@ begin
        fsqrt
        fstp Result
     end;
-
+    Raiz2deX := Result;
 end;
 function RaizYdeX( x : real; y : real  ) : real;
 begin
 
 end;
+
 {Procedimentos Polonesa}
 
 function Precedencia(operador: String): Integer;
@@ -614,14 +615,25 @@ begin
         end
 
         {Caso seja um número/operando}
-        else if(textoTela[i] >= '0') and (textoTela[i] <= '9') then
+        else if(textoTela[i] >= '0') and (textoTela[i] <= '9')or (textoTela[i] = ',') then
         begin
-            while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') do
+            while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') or (textoTela[i] = ',') do
             begin
-                SetLength(operandos, indexOperandos);
-                operandos[indexOperandos] := textoTela[i];
-                Inc(i);
-                Inc(indexOperandos);
+                if textoTela[i] <> ',' then
+                begin
+                     SetLength(operandos, indexOperandos);
+                     operandos[indexOperandos] := textoTela[i];
+                     Inc(i);
+                     Inc(indexOperandos);
+                end
+                else
+                begin
+                     SetLength(operandos, indexOperandos);
+                     operandos[indexOperandos] := '.';
+                     Inc(i);
+                     Inc(indexOperandos);
+                end;
+
             end;
             caracteres := operandos;
             flagNumero := true;
@@ -733,7 +745,6 @@ begin
             if flagGraus then
             begin
                 operando := (operando * 3.14) / 180;
-                //resultando:= SinRadianos(operando);
             end;
 
             resultado := SinRadianos(operando);
@@ -850,7 +861,6 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
-            resultado:= PotenciaXY(operando, operando2);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -860,12 +870,11 @@ begin
             Inc(indexLista);
             retiradoPilha := pilha[indexPilha-1];
             Dec(indexPilha);
-            //retiradoPilha2 := pilha[indexPilha-1];
-            //Dec(indexPilha);
+            retiradoPilha2 := pilha[indexPilha-1];
+            Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
-            //operando2 := StrToFloat(retiradoPilha2);
+            operando2 := StrToFloat(retiradoPilha2);
             {Funcao raiz}
-            resultado:= Raiz2deX(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -897,7 +906,7 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             //{Funcao divisao}
-            resultado := Dividir(operando2, operando);
+            resultado := Dividir(operando, operando2);
             //{AdicionarNoPilha(pilha, );}
         end
 

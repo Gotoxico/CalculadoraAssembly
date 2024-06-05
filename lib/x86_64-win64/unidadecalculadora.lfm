@@ -22,9 +22,9 @@ object Calculator: TCalculator
     ParentColor = False
     TabOrder = 0
     object CheckGroup: TGroupBox
-      Left = 20
+      Left = 29
       Height = 41
-      Top = 80
+      Top = 89
       Width = 71
       Anchors = []
       ClientHeight = 16
@@ -42,9 +42,9 @@ object Calculator: TCalculator
       end
     end
     object ApagarGroup: TGroupBox
-      Left = 130
+      Left = 135
       Height = 50
-      Top = 80
+      Top = 86
       Width = 220
       Anchors = []
       ClientHeight = 25
@@ -369,9 +369,9 @@ object Calculator: TCalculator
       end
     end
     object RadioGroup: TGroupBox
-      Left = 20
+      Left = 68
       Height = 40
-      Top = 48
+      Top = 55
       Width = 380
       Anchors = []
       ClientHeight = 15
@@ -401,7 +401,9 @@ object Calculator: TCalculator
         Width = 82
         Anchors = []
         Caption = 'Radianos'
+        Checked = True
         TabOrder = 1
+        TabStop = True
         OnChange = RadianosChange
       end
     end

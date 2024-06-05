@@ -124,7 +124,7 @@ end;
 
 procedure TCalculator.RadianosChange(Sender: TObject);
 begin
-    flag
+
 end;
 
 procedure TCalculator.InvChange(Sender: TObject);
@@ -435,8 +435,8 @@ begin
      {$ASMMODE intel}
      asm
         finit
-        fld x
         fld y
+        fld x
         fdiv
         fstp result
      end;
@@ -531,12 +531,13 @@ begin
        fsqrt
        fstp Result
     end;
-
+    Raiz2deX := Result;
 end;
 function RaizYdeX( x : real; y : real  ) : real;
 begin
 
 end;
+
 {Procedimentos Polonesa}
 
 function Precedencia(operador: String): Integer;
@@ -614,14 +615,25 @@ begin
         end
 
         {Caso seja um número/operando}
-        else if(textoTela[i] >= '0') and (textoTela[i] <= '9') then
+        else if(textoTela[i] >= '0') and (textoTela[i] <= '9')or (textoTela[i] = ',') then
         begin
-            while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') do
+            while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') or (textoTela[i] = ',') do
             begin
-                SetLength(operandos, indexOperandos);
-                operandos[indexOperandos] := textoTela[i];
-                Inc(i);
-                Inc(indexOperandos);
+                if textoTela[i] <> ',' then
+                begin
+                     SetLength(operandos, indexOperandos);
+                     operandos[indexOperandos] := textoTela[i];
+                     Inc(i);
+                     Inc(indexOperandos);
+                end
+                else
+                begin
+                     SetLength(operandos, indexOperandos);
+                     operandos[indexOperandos] := '.';
+                     Inc(i);
+                     Inc(indexOperandos);
+                end;
+
             end;
             caracteres := operandos;
             flagNumero := true;
@@ -719,241 +731,243 @@ begin
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
-
     while indexLista <= High(lista) do
     begin
-        if(lista[indexLista] = 'sen') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao seno}
-            if flagGraus then
-            begin
-                operando := (operando * 3.14) / 180;
-                //resultando:= SinRadianos(operando);
-            end;
-
-            resultado := SinRadianos(operando);
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'cos') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao cosseno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'tan') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao tangente}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'arcsen') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao arco-seno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'arccos') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao arco-cosseno}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'arco-tangente') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao arco-tangente}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'ln') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao logaritmo-neperiano}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = 'log') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao logaritmo}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '!') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao fatorial}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '~') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            {Funcao troca-sinal}
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '^') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
-            {Funcao exponencial}
-            resultado:= PotenciaXY(operando, operando2);
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '√') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            //retiradoPilha2 := pilha[indexPilha-1];
-            //Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            //operando2 := StrToFloat(retiradoPilha2);
-            {Funcao raiz}
-            resultado:= Raiz2deX(operando);
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '*') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
-            {Funcao multiplicacao}
-            resultado := Multiplicar(operando, operando2);
-            pilha[indexPilha] := FloatToStr(resultado);
-            Inc(indexPilha);
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else if(lista[indexLista] = '/') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
-            //{Funcao divisao}
-            resultado := Dividir(operando2, operando);
-            //{AdicionarNoPilha(pilha, );}
-        end
-
-        else if (lista[indexLista] = '+') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
-            resultado:= (Soma(operando, operando2));
-            {Funcao soma}
-            pilha[indexPilha] := FloatToStr(resultado);
-            Inc(indexPilha);
-        end
-
-        else if(lista[indexLista] = '-') then
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            retiradoPilha := pilha[indexPilha-1];
-            Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
-            operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
-            {Funcao subtracao}
-            resultado:= (Subtrair(operando, operando2));
-            {AdicionarNoPilha(pilha, );}
-        end
-
-        else
-        begin
-            retiradoLista := lista[indexLista];
-            Inc(indexLista);
-            pilha[indexPilha] := retiradoLista;
-            Inc(indexPilha);
-        end;
+         retiradoLista := lista[indexLista];
+         Display.text := retiradoLista;
     end;
 
-    {Exibindo Resultado Display}
-    if(flagGraus) then
-    begin
-        resultado := (180/3.14)*StrToFloat(pilha[indexPilha-1]);
-        Display.text := FloatToStr(resultado);
-    end
-
-    else
-    begin
-        //retiradoPilha := pilha[indexPilha - 1];
-        //Display.text := retiradoPilha;
-        Display.text := FloatToStr(resultado);
-    end;
+    //while indexLista <= High(lista) do
+    //begin
+    //    if(lista[indexLista] = 'sen') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao seno}
+    //        if flagGraus then
+    //        begin
+    //            operando := (operando * 3.14) / 180;
+    //        end;
+    //
+    //        resultado := SinRadianos(operando);
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'cos') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao cosseno}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'tan') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao tangente}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'arcsen') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao arco-seno}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'arccos') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao arco-cosseno}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'arco-tangente') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao arco-tangente}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'ln') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao logaritmo-neperiano}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = 'log') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao logaritmo}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '!') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao fatorial}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '~') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        {Funcao troca-sinal}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '^') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        {Funcao exponencial}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '√') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        {Funcao raiz}
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '*') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        {Funcao multiplicacao}
+    //        resultado := Multiplicar(operando, operando2);
+    //        pilha[indexPilha] := FloatToStr(resultado);
+    //        Inc(indexPilha);
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if(lista[indexLista] = '/') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        //{Funcao divisao}
+    //        resultado := Dividir(operando, operando2);
+    //        //{AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else if (lista[indexLista] = '+') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        resultado:= (Soma(operando, operando2));
+    //        {Funcao soma}
+    //        pilha[indexPilha] := FloatToStr(resultado);
+    //        Inc(indexPilha);
+    //    end
+    //
+    //    else if(lista[indexLista] = '-') then
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        retiradoPilha := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        retiradoPilha2 := pilha[indexPilha-1];
+    //        Dec(indexPilha);
+    //        operando := StrToFloat(retiradoPilha);
+    //        operando2 := StrToFloat(retiradoPilha2);
+    //        {Funcao subtracao}
+    //        resultado:= (Subtrair(operando, operando2));
+    //        {AdicionarNoPilha(pilha, );}
+    //    end
+    //
+    //    else
+    //    begin
+    //        retiradoLista := lista[indexLista];
+    //        Inc(indexLista);
+    //        pilha[indexPilha] := retiradoLista;
+    //        Inc(indexPilha);
+    //    end;
+    //end;
+    //
+    //{Exibindo Resultado Display}
+    //if(flagGraus) then
+    //begin
+    //    resultado := (180/3.14)*StrToFloat(pilha[indexPilha-1]);
+    //    Display.text := FloatToStr(resultado);
+    //end
+    //
+    //else
+    //begin
+    //    //retiradoPilha := pilha[indexPilha - 1];
+    //    //Display.text := retiradoPilha;
+    //    Display.text := FloatToStr(resultado);
+    //end;
 
 end;
 
