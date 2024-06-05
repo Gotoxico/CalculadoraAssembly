@@ -158,6 +158,7 @@ begin
         end;
 end;
 
+
 procedure TCalculator.CClick(Sender: TObject);
 begin
      Display.text := '';
@@ -348,9 +349,7 @@ begin
 end;
 
 {Procedimentos Calculo}
-
 function Soma(a, b: real): real;
-
 begin
     {$ASMMODE intel}
     asm
@@ -360,7 +359,6 @@ begin
         fadd st(0), st(1)        // Adiciona b ao valor no topo da pilha
         fstp result     // Armazena o resultado em result e desempilha
     end;
-
 end;
 
 function Multiplicar(a, b : real) : real;
@@ -385,26 +383,17 @@ begin
        fstp result
     end;
 end;
-function sinGraus(x: real) : real;
-begin
-    {$ASMMODE intel}
-    asm
-       finit
-       fld x
-
-    end;
-end;
 
 function UmSobreX(a : real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld a
        fld1
        fdiv st, st(1)
        fstp result
     end;
-    UmSobreX := result;
 end;
 function EulerAX(x : real) : real;
 var
@@ -413,6 +402,7 @@ begin
     euler:= 2.71828;
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fld euler
        fyl2x
@@ -426,9 +416,6 @@ begin
        fscale
        fstp result
     end;
-
-    EulerAX := result;
-
 end;
 function Dividir(x :real; y: real) : real;
 begin
@@ -440,15 +427,15 @@ begin
         fdiv
         fstp result
      end;
-
 end;
- function Potencia2(x : real) : real;
+ function Potencia2(x , y : real) : real;
  var
      expoente : real;
  begin
      expoente := 2;
      {$ASMMODE intel}
      asm
+        finit
         fld x
         fld expoente
         fyl2x
@@ -461,53 +448,53 @@ end;
         fscale
         fst result
      end;
-         Potencia2 := result;
  end;
 function SinRadianos(x : real) : real;
 begin
      {$ASMMODE intel}
      asm
+        finit
         fld x
         fsin
         fst result
      end;
-     SinRadianos := result
 end;
 function CosRadianos(x :real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fcos
        fst Result
     end;
-    CosRadianos := Result;
 end;
 function TanRadianos(x : real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fsincos
        fdiv
        fst Result
     end;
-    TanRadianos := Result;
 end;
 function arcTan( x: real) : real;
 begin
     {$ASMMODE intel}
     asm
+       finit
        fld x
        fpatan
        fstp Result
     end;
-
 end;
 function PotenciaXY(x: real ; y: real) : real;
 begin
      {$ASMMODE intel}
      asm
+        finit
         fld y
         fld x
         fyl2x
@@ -520,7 +507,6 @@ begin
         fscale
         fst result
      end;
-
 end;
 function Raiz2deX (x : real) : real;
 begin
@@ -531,11 +517,20 @@ begin
        fsqrt
        fstp Result
     end;
-    Raiz2deX := Result;
 end;
 function RaizYdeX( x : real; y : real  ) : real;
 begin
 
+end;
+function ChangeSignal(x:real) : real;
+begin
+    {$ASMMODE intel}
+    asm
+       finit
+       fld x
+       fchs
+       fstp result
+    end;
 end;
 
 {Procedimentos Polonesa}
@@ -556,7 +551,7 @@ begin
 
     else if operador = '~' then
     begin
-        Precedencia := 4;
+        Precedencia := 9;
     end
 
     else if (operador = '^') or (operador = '√') then
@@ -629,7 +624,7 @@ begin
         end
         else if textoTela[i] = 'π' then
            begin
-                caracteres := '3,14';
+                caracteres := '3.14';
                 Inc(i);
                 flagNumero := true;
            end
@@ -734,7 +729,7 @@ begin
             {Funcao seno}
             if flagGraus then
             begin
-                operando := (operando * 3.14) / 180;
+                operando := (operando * 3.14159265358979323846) / 180;
             end;
 
             resultado := SinRadianos(operando);
@@ -749,6 +744,11 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao cosseno}
+            if flagGraus then
+            begin
+                operando := (operando * 3.14159265358979323846) / 180;
+            end;
+            resultado := CosRadianos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -760,6 +760,10 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao tangente}
+            if flagGraus then
+            begin
+                operando := (operando * 3.14159265358979323846) / 180;
+            end;
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -837,6 +841,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao troca-sinal}
+            resultado := ChangeSignal(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -851,9 +856,12 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
-            {AdicionarNoPilha(pilha, );}
-        end
+            //if operando = 2 then
+            //begin
+            //    resultado:=
+            //{AdicionarNoPilha(pilha, );}
 
+            end
         else if(lista[indexLista] = '√') then
         begin
             retiradoLista := lista[indexLista];
@@ -940,20 +948,14 @@ begin
         end;
     end;
 
-    {Exibindo Resultado Display}
-    if(flagGraus) then
-    begin
-        resultado := (180/3.14)*StrToFloat(pilha[indexPilha-1]);
-        Display.text := FloatToStr(resultado);
-    end
 
-    else
-    begin
+
+
         //retiradoPilha := pilha[indexPilha - 1];
         //Display.text := retiradoPilha;
         Display.text := FloatToStr(resultado);
-    end;
+
 
 end;
 
-end.
+  end.
