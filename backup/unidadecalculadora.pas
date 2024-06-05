@@ -124,7 +124,7 @@ end;
 
 procedure TCalculator.RadianosChange(Sender: TObject);
 begin
-
+    flag
 end;
 
 procedure TCalculator.InvChange(Sender: TObject);
