@@ -8,7 +8,6 @@ object Calculator: TCalculator
   ClientHeight = 371
   ClientWidth = 469
   DesignTimePPI = 120
-  LCLVersion = '3.2.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 370
