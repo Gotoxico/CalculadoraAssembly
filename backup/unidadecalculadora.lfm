@@ -7,7 +7,6 @@ object Calculator: TCalculator
   Caption = 'Calculadora'
   ClientHeight = 297
   ClientWidth = 375
-  LCLVersion = '3.2.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 296
@@ -400,7 +399,9 @@ object Calculator: TCalculator
         Width = 66
         Anchors = []
         Caption = 'Radianos'
+        Checked = True
         TabOrder = 1
+        TabStop = True
         OnChange = RadianosChange
       end
     end
