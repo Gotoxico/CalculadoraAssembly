@@ -617,11 +617,7 @@ begin
         {Caso seja um número/operando}
         else if(textoTela[i] >= '0') and (textoTela[i] <= '9') then
         begin
-            while(textoTela[i] <> 'l') and (textoTela[i] <> 's') and (textoTela[i] <> 'c')
-            and (textoTela[i] <> 't') and (textoTela[i] <> 'a') and (textoTela[i] <> '(')
-            and (textoTela[i] <> ')') and (textoTela[i] <> '+') and (textoTela[i] <> '-')
-            and (textoTela[i] <> '*') and (textoTela[i] <> '/') and (textoTela[i] <> '^')
-            and (textoTela[i] <> '!') and (textoTela[i] <> '~') and (textoTela[i] <> '√') and (textoTela[i] <> 'π') do
+            while (i <= tamanhoTextoTela) and (textoTela[i] >= '0') and (textoTela[i] <= '9') do
             begin
                 SetLength(operandos, indexOperandos);
                 operandos[indexOperandos] := textoTela[i];
