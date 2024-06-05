@@ -719,7 +719,8 @@ begin
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
-    while indexLista <= 200 do
+
+    while indexLista <= High(lista) do
     begin
         if(lista[indexLista] = 'sen') then
         begin
@@ -733,7 +734,7 @@ begin
             begin
                 operando := (operando * 3.14) / 180;
                 //resultando:= SinRadianos(operando);
-            end
+            end;
 
             resultado := SinRadianos(operando);
             {AdicionarNoPilha(pilha, );}
