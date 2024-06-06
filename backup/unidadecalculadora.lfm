@@ -344,7 +344,7 @@ object Calculator: TCalculator
         Height = 31
         Top = 150
         Width = 54
-        Caption = 'π'
+        Caption = 'pi'
         TabOrder = 29
         OnClick = PiClick
       end

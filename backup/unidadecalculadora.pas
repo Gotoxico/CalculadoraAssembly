@@ -332,7 +332,7 @@ end;
 
 procedure TCalculator.PiClick(Sender: TObject);
 begin
-     Display.text := Display.text + 'π';
+     Display.text := Display.text + 'pi';
 end;
 
 procedure TCalculator.ZeroClick(Sender: TObject);
@@ -397,16 +397,27 @@ begin
      finit
      fld1
      fld x
-     fld x
-     fsub st, st(1)
-     @maior:
-     fmul st(1), st
      ftst
      fstsw
      sahf
-     fsub st, st(1)
-     ja @maior
+     je @zero
+     jb @zero
+     fld x
+     fsub st, st(2)
+     @maior:
+     fmul st(1), st
+     fcom st(2)
+     fstsw
+     sahf
+     fsub st, st(2)
+     je @Endloop
+     jmp @maior
+     @Endloop:
      fxch
+     jmp @fim
+     @zero:
+     fld1
+     @fim:
      fstp result
     end;
 end;
@@ -641,15 +652,15 @@ begin
 end;
 
 
-procedure TransformarPolonesa(var pilha: TArrayString; var lista: TArrayString; textoTela: String);
+procedure TransformarPolonesa(var pilha: TArrayString; var lista: TArrayString; textoTela: String );
 var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i, indexPilha, indexLista: Integer;
     flagNumero: Boolean;
-    pi : real;
+    pi : string;
 begin
     caracteres:= '';
-    pi := 3.14159265358979323846;
+    pi := '3,141592653589';
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
@@ -665,7 +676,7 @@ begin
         {Caso seja ln, log, seno, cosseno, tangente, arco-seno, arco-cosseno e
         arco-tangente}
         if(textoTela[i] = 'l') or (textoTela[i] = 's') or (textoTela[i] = 'c')
-           or (textoTela[i] = 't') or (textoTela[i] = 'a') then
+           or (textoTela[i] = 't') or (textoTela[i] = 'a')  then
         begin
             while(i <= tamanhoTextoTela) and (textoTela[i] <> '(') do
             begin
@@ -691,12 +702,15 @@ begin
             caracteres := operandos;
             flagNumero := true;
         end
-        else if textoTela[i] = 'π' then
+        else if textoTela[i] = 'p' then
            begin
+           break;
+            Inc(i);
+            Inc(i);
+            caracteres := pi;
+            flagNumero := true;
 
-                caracteres := FloatToStr(pi);
-                Inc(i);
-                flagNumero := true;
+
            end
         else if textoTela[i] = 'e' then
            begin
@@ -866,7 +880,7 @@ begin
             {AdicionarNoPilha(pilha, );}
         end
 
-        else if(lista[indexLista] = 'arco-tangente') then
+        else if(lista[indexLista] = 'arctan') then
         begin
             retiradoLista := lista[indexLista];
             Inc(indexLista);
@@ -874,6 +888,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-tangente}
+             resultado := arcTan(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
