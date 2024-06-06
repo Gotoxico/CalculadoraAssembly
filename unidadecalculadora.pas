@@ -18,6 +18,7 @@ type
     ApagarGroup: TGroupBox;
     Backspace: TButton;
     AbrirParentese: TButton;
+    Button1: TButton;
     FecharParentese: TButton;
     TrocaSinal: TButton;
     Virgula: TButton;
@@ -61,6 +62,7 @@ type
     procedure AbrirParenteseClick(Sender: TObject);
     procedure AdicaoClick(Sender: TObject);
     procedure BackspaceClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure CClick(Sender: TObject);
     procedure CincoClick(Sender: TObject);
     procedure CossenoClick(Sender: TObject);
@@ -156,6 +158,11 @@ begin
           textoTela := Copy(textoTela, 1, Length(textoTela) - 1);
           Display.text := textoTela;
         end;
+end;
+
+procedure TCalculator.Button1Click(Sender: TObject);
+begin
+     Display.text := Display.text + 'e';
 end;
 
 
@@ -383,6 +390,26 @@ begin
        fstp result
     end;
 end;
+function Fatorial ( x : real ) : real;
+begin
+    {$ASMMODE intel}
+    asm
+     finit
+     fld1
+     fld x
+     fld x
+     fsub st, st(2)
+     @maior:
+     fmul st(1), st
+     ftst
+     fstsw
+     sahf
+     fsub st, st(2)
+     ja @maior
+     fxch
+     fstp result
+    end;
+end;
 
 function UmSobreX(a : real) : real;
 begin
@@ -395,6 +422,7 @@ begin
        fstp result
     end;
 end;
+
 function EulerAX(x : real) : real;
 var
     euler: real;
@@ -449,6 +477,42 @@ end;
         fst result
      end;
  end;
+function Ln(x:real) : real;
+var base : real;
+begin
+    base := 2.71828182845904523;
+    {$ASMMODE intel}
+    asm
+       finit
+       fld1
+       fld x
+       fyl2x
+       fld1
+       fld base
+       fyl2x
+       fdiv
+       fstp result
+    end;
+end;
+
+function Log(x: real) : real;
+var base : real;
+begin
+    base := 10;
+    {$ASMMODE intel}
+    asm
+       finit
+       fld1
+       fld x
+       fyl2x
+       fld1
+       fld base
+       fyl2x
+       fdiv
+       fstp result
+    end;
+end;
+
 function SinRadianos(x : real) : real;
 begin
      {$ASMMODE intel}
@@ -634,6 +698,13 @@ begin
                 Inc(i);
                 flagNumero := true;
            end
+        else if textoTela[i] = 'e' then
+           begin
+
+                caracteres := '2,71828182845904523';
+                Inc(i);
+                flagNumero := true;
+           end
 
         {Caso seja um dos outros operadores ou parenteses}
         else
@@ -814,6 +885,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo-neperiano}
+            resultado := Ln(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -825,6 +897,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo}
+            resultado := Log(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -836,6 +909,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao fatorial}
+            resultado := Fatorial(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -951,9 +1025,6 @@ begin
             Inc(indexPilha);
         end;
     end;
-
-
-
 
         //retiradoPilha := pilha[indexPilha - 1];
         //Display.text := retiradoPilha;
