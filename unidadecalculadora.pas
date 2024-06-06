@@ -155,6 +155,7 @@ begin
 
      if Length(textoTela) > 0 then
         begin
+
           textoTela := Copy(textoTela, 1, Length(textoTela) - 1);
           Display.text := textoTela;
         end;
@@ -561,6 +562,7 @@ begin
     asm
        finit
        fld x
+       fld1
        fpatan
        fstp Result
     end;
@@ -586,8 +588,71 @@ begin
 end;
 
 function arcSin(x : real) : real;
+var
+    expoente : real;
 begin
+     expoente := 2;
+     {$ASMMODE intel}
+     asm
+        finit
+        fld x
+        fld expoente
+        fld x
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        fxch
+        f2xm1
+        fld1
+        fadd
+        fscale
+        fxch
+        fxch st(2)
+        fxch
+        fld1
+        fxch
+        fsub
+        fsqrt
+        fdiv
+        fld1
+        fpatan
+        fstp result
+     end;
 
+end;
+
+function arcCos(x : real) : real;
+var expoente : real;
+begin
+     expoente := 2;
+     {$ASMMODE intel}
+     asm
+        finit
+        fld x
+        fld expoente
+        fld x
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        fxch
+        f2xm1
+        fld1
+        fadd
+        fscale
+        fxch
+        fxch st(2)
+        fxch
+        fld1
+        fxch
+        fsub
+        fsqrt
+        fdivr
+        fld1
+        fpatan
+        fstp result
+     end;
 end;
 
 function Raiz2deX (x : real) : real;
@@ -665,7 +730,7 @@ var
     flagNumero: Boolean;
     pi : string;
 begin
-    caracteres:= '';
+
     pi := '3.141592653589';
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
@@ -710,7 +775,8 @@ begin
         end
         else if textoTela[i] = 'p' then
            begin
-
+            Inc(i) ;
+            Inc(i);
             caracteres := pi;
             flagNumero := true;
            end
@@ -868,6 +934,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-seno}
+            resultado := arcSin(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -879,6 +946,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-cosseno}
+            resultado := arcCos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1040,6 +1108,7 @@ begin
             Inc(indexLista);
             pilha[indexPilha] := retiradoLista;
             Inc(indexPilha);
+            //resultado := StrToFloat(retiradoLista);
         end;
     end;
 
