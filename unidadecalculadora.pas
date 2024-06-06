@@ -438,7 +438,7 @@ function EulerAX(x : real) : real;
 var
     euler: real;
 begin
-    euler:= 2.71828;
+    euler:= 2.7182818284590452353602874713526624977572470936999595749669676277240766303535475945713821785251664274;
     {$ASMMODE intel}
     asm
        finit
@@ -491,7 +491,7 @@ end;
 function Ln(x:real) : real;
 var base : real;
 begin
-    base := 2.71828182845904523;
+    base := 2.71828182845904523536;
     {$ASMMODE intel}
     asm
        finit
@@ -584,6 +584,12 @@ begin
         fst result
      end;
 end;
+
+function arcSin(x : real) : real;
+begin
+
+end;
+
 function Raiz2deX (x : real) : real;
 begin
     {$ASMMODE intel}
@@ -660,7 +666,7 @@ var
     pi : string;
 begin
     caracteres:= '';
-    pi := '3,141592653589';
+    pi := '3.141592653589';
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
@@ -705,11 +711,8 @@ begin
         else if textoTela[i] = 'p' then
            begin
 
-
             caracteres := pi;
             flagNumero := true;
-
-
            end
         else if textoTela[i] = 'e' then
            begin
