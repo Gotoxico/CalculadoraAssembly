@@ -328,7 +328,7 @@ end;
 
 procedure TCalculator.RaizQuadradaXClick(Sender: TObject);
 begin
-     Display.text := Display.text + '√(';
+     Display.text := Display.text + 'raiz(';
 end;
 
 procedure TCalculator.PiClick(Sender: TObject);
@@ -486,7 +486,7 @@ end;
         fld1
         faddp st(1), st
         fscale
-        fst result
+        fstp result
      end;
  end;
 function Ln(x:real) : real;
@@ -532,7 +532,7 @@ begin
         finit
         fld x
         fsin
-        fst result
+        fstp result
      end;
 end;
 function CosRadianos(x :real) : real;
@@ -542,7 +542,7 @@ begin
        finit
        fld x
        fcos
-       fst Result
+       fstp Result
     end;
 end;
 function TanRadianos(x : real) : real;
@@ -553,7 +553,7 @@ begin
        fld x
        fsincos
        fdiv
-       fst Result
+       fstp Result
     end;
 end;
 function arcTan( x: real) : real;
@@ -564,7 +564,7 @@ begin
        fld x
        fld1
        fpatan
-       fstp Result
+       fst Result
     end;
 end;
 function PotenciaXY(x: real ; y: real) : real;
@@ -583,7 +583,7 @@ begin
         fld1
         fadd
         fscale
-        fst result
+        fstp result
      end;
 end;
 
@@ -617,7 +617,7 @@ begin
         fdiv
         fld1
         fpatan
-        fstp result
+        fst result
      end;
 
 end;
@@ -651,7 +651,7 @@ begin
         fdivr
         fld1
         fpatan
-        fstp result
+        fst result
      end;
 end;
 
@@ -662,9 +662,10 @@ begin
        finit
        fld x
        fsqrt
-       fstp Result
+       fstp result
     end;
 end;
+
 function RaizYdeX( x : real; y : real  ) : real;
 begin
 
@@ -701,7 +702,7 @@ begin
         Precedencia := 4;
     end
 
-    else if (operador = '^') or (operador = '√') then
+    else if (operador = '^') or (operador = 'raiz') then
     begin
         Precedencia := 3;
     end
@@ -728,10 +729,8 @@ var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i, indexPilha, indexLista: Integer;
     flagNumero: Boolean;
-    pi : string;
 begin
 
-    pi := '3.141592653589';
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
@@ -744,10 +743,10 @@ begin
         indexFuncoesEspeciais := 1;
         indexOperandos := 1;
         flagNumero := false;
-        {Caso seja ln, log, seno, cosseno, tangente, arco-seno, arco-cosseno e
-        arco-tangente}
+        {Caso seja ln, log, seno, cosseno, tangente, arco-seno, arco-cosseno,
+        arco-tangente ou raiz}
         if(textoTela[i] = 'l') or (textoTela[i] = 's') or (textoTela[i] = 'c')
-           or (textoTela[i] = 't') or (textoTela[i] = 'a')  then
+           or (textoTela[i] = 't') or (textoTela[i] = 'a') or (textoTela[i] = 'r')  then
         begin
             while(i <= tamanhoTextoTela) and (textoTela[i] <> '(') do
             begin
@@ -777,7 +776,7 @@ begin
            begin
             Inc(i) ;
             Inc(i);
-            caracteres := pi;
+            caracteres := '3,141592653589';
             flagNumero := true;
            end
         else if textoTela[i] = 'e' then
@@ -867,9 +866,15 @@ var pilha, lista: TArrayString;
     operando, operando2, resultado: Real;
     indexLista, indexPilha: Integer;
 begin
-     retiradoLista := '';
+    retiradoLista := '';
     TransformarPolonesa(pilha, lista, Display.text);
 
+    {for indexLista := Low(lista) to High(lista) do
+    begin
+        retiradoLista := retiradoLista + lista[indexLista];
+    end;
+    Display.Text := retiradoLista;
+    }
 
     indexLista := Low(lista);
     indexPilha := Low(pilha);
@@ -923,6 +928,7 @@ begin
             begin
                 operando := (operando * 3.14159265358979323846) / 180;
             end;
+            resultado := tanRadianos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -934,6 +940,10 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-seno}
+            if flagGraus then
+            begin
+                resultado := (arcSin(operando) * 180) / 3.14159265358979323846;
+            end;
             resultado := arcSin(operando);
             {AdicionarNoPilha(pilha, );}
         end
@@ -946,7 +956,12 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-cosseno}
+            if flagGraus then
+            begin
+                resultado := (arcCos(operando) * 180) / 3.14159265358979323846;
+            end;
             resultado := arcCos(operando);
+
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -958,7 +973,11 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-tangente}
-             resultado := arcTan(operando);
+            if flagGraus then
+            begin
+                resultado := (arcTan(operando) * 180) / 3.14159265358979323846;
+            end;
+            resultado := arcTan(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1024,17 +1043,15 @@ begin
             resultado := PotenciaXY(operando2, operando);
             //{AdicionarNoPilha(pilha, );}
 
-            end
-        else if(lista[indexLista] = '√') then
+        end
+        else if(lista[indexLista] = 'raiz') then
         begin
             retiradoLista := lista[indexLista];
             Inc(indexLista);
             retiradoPilha := pilha[indexPilha-1];
             Dec(indexPilha);
-            retiradoPilha2 := pilha[indexPilha-1];
-            Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
-            operando2 := StrToFloat(retiradoPilha2);
+            resultado := Raiz2deX(operando);
             {Funcao raiz}
             {AdicionarNoPilha(pilha, );}
         end
@@ -1108,7 +1125,7 @@ begin
             Inc(indexLista);
             pilha[indexPilha] := retiradoLista;
             Inc(indexPilha);
-            resultado := StrToFloat(retiradoLista);
+            //resultado := StrToFloat(retiradoLista);
         end;
     end;
 
@@ -1116,7 +1133,6 @@ begin
         //Display.text := retiradoPilha;
         Display.text := FloatToStr(resultado);
 
-
 end;
 
-  end.
+    end.
