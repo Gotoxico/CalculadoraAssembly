@@ -8,6 +8,7 @@ object Calculator: TCalculator
   ClientHeight = 371
   ClientWidth = 469
   DesignTimePPI = 120
+  LCLVersion = '3.2.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 370
@@ -344,7 +345,7 @@ object Calculator: TCalculator
         Height = 31
         Top = 150
         Width = 54
-        Caption = 'π'
+        Caption = 'pi'
         TabOrder = 29
         OnClick = PiClick
       end
@@ -365,6 +366,15 @@ object Calculator: TCalculator
         Caption = ')'
         TabOrder = 31
         OnClick = FecharParenteseClick
+      end
+      object Button1: TButton
+        Left = 0
+        Height = 31
+        Top = 112
+        Width = 54
+        Caption = 'e'
+        TabOrder = 32
+        OnClick = Button1Click
       end
     end
     object RadioGroup: TGroupBox

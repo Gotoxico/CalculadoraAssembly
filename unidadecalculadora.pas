@@ -18,6 +18,7 @@ type
     ApagarGroup: TGroupBox;
     Backspace: TButton;
     AbrirParentese: TButton;
+    Button1: TButton;
     FecharParentese: TButton;
     TrocaSinal: TButton;
     Virgula: TButton;
@@ -61,6 +62,7 @@ type
     procedure AbrirParenteseClick(Sender: TObject);
     procedure AdicaoClick(Sender: TObject);
     procedure BackspaceClick(Sender: TObject);
+    procedure Button1Click(Sender: TObject);
     procedure CClick(Sender: TObject);
     procedure CincoClick(Sender: TObject);
     procedure CossenoClick(Sender: TObject);
@@ -153,9 +155,15 @@ begin
 
      if Length(textoTela) > 0 then
         begin
+
           textoTela := Copy(textoTela, 1, Length(textoTela) - 1);
           Display.text := textoTela;
         end;
+end;
+
+procedure TCalculator.Button1Click(Sender: TObject);
+begin
+     Display.text := Display.text + 'e';
 end;
 
 
@@ -325,7 +333,7 @@ end;
 
 procedure TCalculator.PiClick(Sender: TObject);
 begin
-     Display.text := Display.text + 'π';
+     Display.text := Display.text + 'pi';
 end;
 
 procedure TCalculator.ZeroClick(Sender: TObject);
@@ -383,6 +391,37 @@ begin
        fstp result
     end;
 end;
+function Fatorial ( x : real ) : real;
+begin
+    {$ASMMODE intel}
+    asm
+     finit
+     fld1
+     fld x
+     ftst
+     fstsw
+     sahf
+     je @zero
+     jb @zero
+     fld x
+     fsub st, st(2)
+     @maior:
+     fmul st(1), st
+     fcom st(2)
+     fstsw
+     sahf
+     fsub st, st(2)
+     je @Endloop
+     jmp @maior
+     @Endloop:
+     fxch
+     jmp @fim
+     @zero:
+     fld1
+     @fim:
+     fstp result
+    end;
+end;
 
 function UmSobreX(a : real) : real;
 begin
@@ -395,11 +434,12 @@ begin
        fstp result
     end;
 end;
+
 function EulerAX(x : real) : real;
 var
     euler: real;
 begin
-    euler:= 2.71828;
+    euler:= 2.7182818284590452353602874713526624977572470936999595749669676277240766303535475945713821785251664274;
     {$ASMMODE intel}
     asm
        finit
@@ -449,6 +489,42 @@ end;
         fst result
      end;
  end;
+function Ln(x:real) : real;
+var base : real;
+begin
+    base := 2.71828182845904523536;
+    {$ASMMODE intel}
+    asm
+       finit
+       fld1
+       fld x
+       fyl2x
+       fld1
+       fld base
+       fyl2x
+       fdiv
+       fstp result
+    end;
+end;
+
+function Log(x: real) : real;
+var base : real;
+begin
+    base := 10;
+    {$ASMMODE intel}
+    asm
+       finit
+       fld1
+       fld x
+       fyl2x
+       fld1
+       fld base
+       fyl2x
+       fdiv
+       fstp result
+    end;
+end;
+
 function SinRadianos(x : real) : real;
 begin
      {$ASMMODE intel}
@@ -486,6 +562,7 @@ begin
     asm
        finit
        fld x
+       fld1
        fpatan
        fstp Result
     end;
@@ -501,13 +578,83 @@ begin
         fld st
         frndint
         fsub st(1), st
+        fxch
         f2xm1
         fld1
-        faddp st(1), st
+        fadd
         fscale
         fst result
      end;
 end;
+
+function arcSin(x : real) : real;
+var
+    expoente : real;
+begin
+     expoente := 2;
+     {$ASMMODE intel}
+     asm
+        finit
+        fld x
+        fld expoente
+        fld x
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        fxch
+        f2xm1
+        fld1
+        fadd
+        fscale
+        fxch
+        fxch st(2)
+        fxch
+        fld1
+        fxch
+        fsub
+        fsqrt
+        fdiv
+        fld1
+        fpatan
+        fstp result
+     end;
+
+end;
+
+function arcCos(x : real) : real;
+var expoente : real;
+begin
+     expoente := 2;
+     {$ASMMODE intel}
+     asm
+        finit
+        fld x
+        fld expoente
+        fld x
+        fyl2x
+        fld st
+        frndint
+        fsub st(1), st
+        fxch
+        f2xm1
+        fld1
+        fadd
+        fscale
+        fxch
+        fxch st(2)
+        fxch
+        fld1
+        fxch
+        fsub
+        fsqrt
+        fdivr
+        fld1
+        fpatan
+        fstp result
+     end;
+end;
+
 function Raiz2deX (x : real) : real;
 begin
     {$ASMMODE intel}
@@ -551,7 +698,7 @@ begin
 
     else if operador = '~' then
     begin
-        Precedencia := 9;
+        Precedencia := 4;
     end
 
     else if (operador = '^') or (operador = '√') then
@@ -576,17 +723,21 @@ begin
 end;
 
 
-procedure TransformarPolonesa(var pilha: TArrayString; var lista: TArrayString; textoTela: String);
+procedure TransformarPolonesa(var pilha: TArrayString; var lista: TArrayString; textoTela: String );
 var
     caracteres, funcoesEspeciais, operandos, retiradoPilha: String;
     indexFuncoesEspeciais, indexOperandos, tamanhoTextoTela, parenteses, i, indexPilha, indexLista: Integer;
     flagNumero: Boolean;
+    pi : string;
 begin
+
+    pi := '3.141592653589';
     tamanhoTextoTela := Length(textoTela);
     parenteses := 0;
     i := 1;
     indexPilha := 1;
     indexLista := 1;
+
 
     while i <= tamanhoTextoTela do
     begin
@@ -596,7 +747,7 @@ begin
         {Caso seja ln, log, seno, cosseno, tangente, arco-seno, arco-cosseno e
         arco-tangente}
         if(textoTela[i] = 'l') or (textoTela[i] = 's') or (textoTela[i] = 'c')
-           or (textoTela[i] = 't') or (textoTela[i] = 'a') then
+           or (textoTela[i] = 't') or (textoTela[i] = 'a')  then
         begin
             while(i <= tamanhoTextoTela) and (textoTela[i] <> '(') do
             begin
@@ -622,9 +773,17 @@ begin
             caracteres := operandos;
             flagNumero := true;
         end
-        else if textoTela[i] = 'π' then
+        else if textoTela[i] = 'p' then
            begin
-                caracteres := '3.14';
+            Inc(i) ;
+            Inc(i);
+            caracteres := pi;
+            flagNumero := true;
+           end
+        else if textoTela[i] = 'e' then
+           begin
+
+                caracteres := '2,71828182845904523';
                 Inc(i);
                 flagNumero := true;
            end
@@ -775,6 +934,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-seno}
+            resultado := arcSin(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -786,10 +946,11 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-cosseno}
+            resultado := arcCos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
-        else if(lista[indexLista] = 'arco-tangente') then
+        else if(lista[indexLista] = 'arctan') then
         begin
             retiradoLista := lista[indexLista];
             Inc(indexLista);
@@ -797,6 +958,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao arco-tangente}
+             resultado := arcTan(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -808,6 +970,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo-neperiano}
+            resultado := Ln(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -819,6 +982,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo}
+            resultado := Log(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -830,6 +994,7 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             {Funcao fatorial}
+            resultado := Fatorial(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -856,9 +1021,7 @@ begin
             operando := StrToFloat(retiradoPilha);
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
-            //if operando = 2 then
-            //begin
-            //    resultado:=
+            resultado := PotenciaXY(operando2, operando);
             //{AdicionarNoPilha(pilha, );}
 
             end
@@ -945,11 +1108,9 @@ begin
             Inc(indexLista);
             pilha[indexPilha] := retiradoLista;
             Inc(indexPilha);
+            //resultado := StrToFloat(retiradoLista);
         end;
     end;
-
-
-
 
         //retiradoPilha := pilha[indexPilha - 1];
         //Display.text := retiradoPilha;
