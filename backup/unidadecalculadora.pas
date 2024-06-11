@@ -564,7 +564,7 @@ begin
        fld x
        fld1
        fpatan
-       fst Result
+       fstp Result
     end;
 end;
 function PotenciaXY(x: real ; y: real) : real;
@@ -617,7 +617,7 @@ begin
         fdiv
         fld1
         fpatan
-        fst result
+        fstp result
      end;
 
 end;
@@ -651,7 +651,7 @@ begin
         fdivr
         fld1
         fpatan
-        fst result
+        fstp result
      end;
 end;
 
@@ -862,24 +862,29 @@ end;
 
 procedure TCalculator.IgualClick(Sender: TObject);
 var pilha, lista: TArrayString;
-    retiradoLista, retiradoPilha, retiradoPilha2: String;
+    retiradoLista, retiradoPilha, retiradoPilha2, teste: String;
     operando, operando2, resultado: Real;
     indexLista, indexPilha: Integer;
 begin
+    teste := '';
+
     retiradoLista := '';
+    retiradoPilha := '';
     TransformarPolonesa(pilha, lista, Display.text);
 
     {for indexLista := Low(lista) to High(lista) do
     begin
         retiradoLista := retiradoLista + lista[indexLista];
+        retiradoLista := retiradoLista + '|';
     end;
-    Display.Text := retiradoLista;
-    }
+    Display.Text := retiradoLista;}
+
 
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
-
+    appendstr(teste, FloatToStr(Low(lista))+';');
+    appendstr(teste, FloatToStr(Low(pilha))+';');
 
     while indexLista <= High(lista) do
     begin
@@ -894,9 +899,15 @@ begin
             if flagGraus then
             begin
                 operando := (operando * 3.14159265358979323846) / 180;
+                resultado := SinRadianos(operando);
+            end
+            else
+            begin
+                resultado := SinRadianos(operando);
             end;
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
 
-            resultado := SinRadianos(operando);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -911,9 +922,16 @@ begin
             if flagGraus then
             begin
                 operando := (operando * 3.14159265358979323846) / 180;
+                resultado := CosRadianos(operando);
+            end
+            else
+            begin
+                resultado := CosRadianos(operando);
             end;
-            resultado := CosRadianos(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
+            appendstr(teste, FloatToStr(resultado) + '|');
         end
 
         else if(lista[indexLista] = 'tan') then
@@ -927,8 +945,14 @@ begin
             if flagGraus then
             begin
                 operando := (operando * 3.14159265358979323846) / 180;
+                resultado := tanRadianos(operando);
+            end
+            else
+            begin
+                resultado := tanRadianos(operando);
             end;
-            resultado := tanRadianos(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -943,8 +967,14 @@ begin
             if flagGraus then
             begin
                 resultado := (arcSin(operando) * 180) / 3.14159265358979323846;
+                resultado := arcSin(operando);
+            end
+            else
+            begin
+                resultado := arcSin(operando);
             end;
-            resultado := arcSin(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -959,9 +989,14 @@ begin
             if flagGraus then
             begin
                 resultado := (arcCos(operando) * 180) / 3.14159265358979323846;
+                resultado := arcCos(operando);
+            end
+            else
+            begin
+                resultado := arcCos(operando);
             end;
-            resultado := arcCos(operando);
-
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -976,8 +1011,14 @@ begin
             if flagGraus then
             begin
                 resultado := (arcTan(operando) * 180) / 3.14159265358979323846;
+                resultado := arcTan(operando);
+            end
+            else
+            begin
+                resultado := arcTan(operando);
             end;
-            resultado := arcTan(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -990,6 +1031,8 @@ begin
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo-neperiano}
             resultado := Ln(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1002,6 +1045,8 @@ begin
             operando := StrToFloat(retiradoPilha);
             {Funcao logaritmo}
             resultado := Log(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1014,6 +1059,8 @@ begin
             operando := StrToFloat(retiradoPilha);
             {Funcao fatorial}
             resultado := Fatorial(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1026,6 +1073,8 @@ begin
             operando := StrToFloat(retiradoPilha);
             {Funcao troca-sinal}
             resultado := ChangeSignal(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1041,6 +1090,8 @@ begin
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao exponencial}
             resultado := PotenciaXY(operando2, operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             //{AdicionarNoPilha(pilha, );}
 
         end
@@ -1052,6 +1103,8 @@ begin
             Dec(indexPilha);
             operando := StrToFloat(retiradoPilha);
             resultado := Raiz2deX(operando);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {Funcao raiz}
             {AdicionarNoPilha(pilha, );}
         end
@@ -1071,6 +1124,7 @@ begin
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
+            appendstr(teste, FloatToStr(resultado) + '|');
         end
 
         else if(lista[indexLista] = '/') then
@@ -1085,7 +1139,10 @@ begin
             operando2 := StrToFloat(retiradoPilha2);
             //{Funcao divisao}
             resultado := Dividir(operando, operando2);
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             //{AdicionarNoPilha(pilha, );}
+            appendstr(teste, FloatToStr(resultado) + '|');
         end
 
         else if (lista[indexLista] = '+') then
@@ -1116,6 +1173,8 @@ begin
             operando2 := StrToFloat(retiradoPilha2);
             {Funcao subtracao}
             resultado:= (Subtrair(operando, operando2));
+            pilha[indexPilha] := FloatToStr(resultado);
+            Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
         end
 
@@ -1131,8 +1190,8 @@ begin
 
         //retiradoPilha := pilha[indexPilha - 1];
         //Display.text := retiradoPilha;
-        Display.text := FloatToStr(resultado);
-
+        retiradoPilha := pilha[1];
+        Display.text := retiradoPilha;
 end;
 
     end.
