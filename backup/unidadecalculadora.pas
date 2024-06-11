@@ -64,6 +64,7 @@ type
     procedure BackspaceClick(Sender: TObject);
     procedure Button1Click(Sender: TObject);
     procedure CClick(Sender: TObject);
+    procedure CheckGroupClick(Sender: TObject);
     procedure CincoClick(Sender: TObject);
     procedure CossenoClick(Sender: TObject);
     procedure DisplayChange(Sender: TObject);
@@ -80,6 +81,7 @@ type
     procedure NFatorialClick(Sender: TObject);
     procedure NoveClick(Sender: TObject);
     procedure OitoClick(Sender: TObject);
+    procedure Panel1Click(Sender: TObject);
     procedure PiClick(Sender: TObject);
     procedure QuatroClick(Sender: TObject);
     procedure RadianosChange(Sender: TObject);
@@ -173,6 +175,11 @@ begin
 
 end;
 
+procedure TCalculator.CheckGroupClick(Sender: TObject);
+begin
+
+end;
+
 procedure TCalculator.AbrirParenteseClick(Sender: TObject);
 begin
      Display.text := Display.text + '(';
@@ -234,6 +241,11 @@ end;
 procedure TCalculator.OitoClick(Sender: TObject);
 begin
      Display.text := Display.text + '8';
+
+end;
+
+procedure TCalculator.Panel1Click(Sender: TObject);
+begin
 
 end;
 
@@ -883,9 +895,6 @@ begin
     indexLista := Low(lista);
     indexPilha := Low(pilha);
 
-    appendstr(teste, FloatToStr(Low(lista))+';');
-    appendstr(teste, FloatToStr(Low(pilha))+';');
-
     while indexLista <= High(lista) do
     begin
         if(lista[indexLista] = 'sen') then
@@ -905,6 +914,10 @@ begin
             begin
                 resultado := SinRadianos(operando);
             end;
+             //if (resultado  0.0001) then
+             //   begin
+             //       resultado:= 0;
+             //   end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
 
@@ -923,11 +936,16 @@ begin
             begin
                 operando := (operando * 3.14159265358979323846) / 180;
                 resultado := CosRadianos(operando);
+
             end
             else
             begin
                 resultado := CosRadianos(operando);
             end;
+            //if (resultado < 0.0001) then
+            //    begin
+            //        resultado:= 0;
+            //    end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
@@ -951,6 +969,10 @@ begin
             begin
                 resultado := tanRadianos(operando);
             end;
+             //if (resultado < 0.0001) then
+             //   begin
+             //       resultado:= 0;
+             //   end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
@@ -1106,6 +1128,7 @@ begin
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {Funcao raiz}
+
             {AdicionarNoPilha(pilha, );}
         end
 
