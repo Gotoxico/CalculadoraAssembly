@@ -989,7 +989,6 @@ begin
             if flagGraus then
             begin
                 resultado := (arcSin(operando) * 180) / 3.14159265358979323846;
-                resultado := arcSin(operando);
             end
             else
             begin
@@ -1032,7 +1031,6 @@ begin
             if flagGraus then
             begin
                 resultado := (arcTan(operando) * 180) / 3.14159265358979323846;
-
             end
             else
             begin
