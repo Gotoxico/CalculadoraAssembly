@@ -1,15 +1,14 @@
 object Calculator: TCalculator
   Left = 400
-  Height = 457
+  Height = 433
   Top = 428
   Width = 650
   Align = alCustom
   Caption = 'Calculadora'
-  ClientHeight = 457
+  ClientHeight = 433
   ClientWidth = 650
   DesignTimePPI = 120
   Font.Height = -15
-  LCLVersion = '3.2.0.0'
   object Panel1: TPanel
     Left = 0
     Height = 466
@@ -421,17 +420,20 @@ object Calculator: TCalculator
     end
     object Display: TEdit
       Left = 16
-      Height = 27
+      Height = 53
       Top = 24
       Width = 616
       Alignment = taRightJustify
+      AutoSize = False
       Color = clGreen
+      DragMode = dmAutomatic
       Font.CharSet = ANSI_CHARSET
-      Font.Height = -16
+      Font.Height = -40
       Font.Name = 'Times New Roman'
       Font.Pitch = fpVariable
       Font.Quality = fqDraft
       ParentFont = False
+      ReadOnly = True
       TabOrder = 4
       OnChange = DisplayChange
     end

@@ -969,7 +969,7 @@ begin
             begin
                 resultado := tanRadianos(operando);
             end;
-             if (resultado < 0.000001) and (resultado > 0) then
+             if ((resultado < 0.000001) and (resultado > 0)) or ((resultado > -0.000001)and (resultado < 0))then
                 begin
                     resultado:= 0;
                 end;
