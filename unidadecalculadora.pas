@@ -914,10 +914,10 @@ begin
             begin
                 resultado := SinRadianos(operando);
             end;
-             //if (resultado  0.0001) then
-             //   begin
-             //       resultado:= 0;
-             //   end;
+             if (resultado < 0.000001) and (resultado > 0) then
+                begin
+                    resultado:= 0;
+                end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
 
@@ -942,10 +942,10 @@ begin
             begin
                 resultado := CosRadianos(operando);
             end;
-            //if (resultado < 0.0001) then
-            //    begin
-            //        resultado:= 0;
-            //    end;
+            if (resultado < 0.000001) and (resultado > 0) then
+                begin
+                    resultado:= 0;
+                end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
@@ -969,10 +969,10 @@ begin
             begin
                 resultado := tanRadianos(operando);
             end;
-             //if (resultado < 0.0001) then
-             //   begin
-             //       resultado:= 0;
-             //   end;
+             if (resultado < 0.000001) and (resultado > 0) then
+                begin
+                    resultado:= 0;
+                end;
             pilha[indexPilha] := FloatToStr(resultado);
             Inc(indexPilha);
             {AdicionarNoPilha(pilha, );}
@@ -1011,7 +1011,6 @@ begin
             if flagGraus then
             begin
                 resultado := (arcCos(operando) * 180) / 3.14159265358979323846;
-                resultado := arcCos(operando);
             end
             else
             begin
@@ -1033,7 +1032,7 @@ begin
             if flagGraus then
             begin
                 resultado := (arcTan(operando) * 180) / 3.14159265358979323846;
-                resultado := arcTan(operando);
+
             end
             else
             begin

@@ -8,6 +8,7 @@ object Calculator: TCalculator
   ClientHeight = 457
   ClientWidth = 650
   DesignTimePPI = 120
+  Font.Height = -15
   object Panel1: TPanel
     Left = 0
     Height = 466
@@ -22,7 +23,7 @@ object Calculator: TCalculator
     TabOrder = 0
     OnClick = Panel1Click
     object CheckGroup: TGroupBox
-      Left = 32
+      Left = 16
       Height = 50
       Top = 72
       Width = 88
@@ -43,7 +44,7 @@ object Calculator: TCalculator
       end
     end
     object ApagarGroup: TGroupBox
-      Left = 404
+      Left = 412
       Height = 50
       Top = 72
       Width = 220
@@ -72,306 +73,306 @@ object Calculator: TCalculator
       end
     end
     object PrincipaisGroup: TGroupBox
-      Left = 32
-      Height = 306
-      Top = 136
-      Width = 608
-      ClientHeight = 281
-      ClientWidth = 604
+      Left = 16
+      Height = 290
+      Top = 128
+      Width = 616
+      ClientHeight = 265
+      ClientWidth = 612
       ParentBackground = False
       TabOrder = 2
       object ExponencialEulerPorX: TButton
-        Left = 520
-        Height = 39
-        Top = 48
-        Width = 72
+        Left = 536
+        Height = 40
+        Top = 15
+        Width = 68
         Caption = 'e^x'
         TabOrder = 0
         OnClick = ExponencialEulerPorXClick
       end
       object Seno: TButton
-        Left = 344
+        Left = 448
         Height = 39
-        Top = 48
+        Top = 62
         Width = 70
         Caption = 'sin'
         TabOrder = 1
         OnClick = SenoClick
       end
       object UmSobreX: TButton
-        Left = 168
+        Left = 360
         Height = 39
-        Top = 48
+        Top = 15
         Width = 70
         Caption = '1/x'
         TabOrder = 2
         OnClick = UmSobreXClick
       end
       object NFatorial: TButton
-        Left = 344
-        Height = 39
-        Top = 192
+        Left = 448
+        Height = 40
+        Top = 15
         Width = 70
         Caption = 'n!'
         TabOrder = 3
         OnClick = NFatorialClick
       end
       object Logaritmo: TButton
-        Left = 256
+        Left = 272
         Height = 39
-        Top = 48
+        Top = 15
         Width = 70
         Caption = 'log'
         TabOrder = 4
         OnClick = LogaritmoClick
       end
       object LogaritmoNeperial: TButton
-        Left = 344
+        Left = 184
         Height = 39
-        Top = 144
+        Top = 15
         Width = 70
         Caption = 'ln'
         TabOrder = 5
         OnClick = LogaritmoNeperialClick
       end
       object Sete: TButton
-        Left = 80
+        Left = 96
         Height = 39
-        Top = 97
+        Top = 62
         Width = 70
         Caption = '7'
         TabOrder = 6
         OnClick = SeteClick
       end
       object Oito: TButton
-        Left = 168
+        Left = 184
         Height = 39
-        Top = 96
+        Top = 62
         Width = 70
         Caption = '8'
         TabOrder = 7
         OnClick = OitoClick
       end
       object Nove: TButton
-        Left = 256
+        Left = 272
         Height = 39
-        Top = 97
+        Top = 62
         Width = 70
         Caption = '9'
         TabOrder = 8
         OnClick = NoveClick
       end
       object Divisao: TButton
-        Left = 344
+        Left = 360
         Height = 39
-        Top = 96
+        Top = 62
         Width = 70
         Caption = '/'
         TabOrder = 9
         OnClick = DivisaoClick
       end
       object Cosseno: TButton
-        Left = 432
-        Height = 39
-        Top = 96
+        Left = 448
+        Height = 41
+        Top = 107
         Width = 70
         Caption = 'cos'
         TabOrder = 10
         OnClick = CossenoClick
       end
       object XExponencialY: TButton
-        Left = 520
-        Height = 40
-        Top = 96
-        Width = 70
+        Left = 536
+        Height = 39
+        Top = 62
+        Width = 68
         Caption = 'x^y'
         TabOrder = 11
         OnClick = XExponencialYClick
       end
       object Quatro: TButton
-        Left = 80
-        Height = 39
-        Top = 144
+        Left = 96
+        Height = 40
+        Top = 106
         Width = 70
         Caption = '4'
         TabOrder = 12
         OnClick = QuatroClick
       end
       object Cinco: TButton
-        Left = 168
-        Height = 39
-        Top = 144
+        Left = 184
+        Height = 41
+        Top = 107
         Width = 70
         Caption = '5'
         TabOrder = 13
         OnClick = CincoClick
       end
       object Seis: TButton
-        Left = 256
-        Height = 39
-        Top = 144
+        Left = 272
+        Height = 40
+        Top = 107
         Width = 70
         Caption = '6'
         TabOrder = 14
         OnClick = SeisClick
       end
       object Multiplicacao: TButton
-        Left = 432
-        Height = 39
-        Top = 48
+        Left = 360
+        Height = 41
+        Top = 107
         Width = 70
         Caption = '*'
         TabOrder = 15
         OnClick = MultiplicacaoClick
       end
       object Tangente: TButton
-        Left = 432
-        Height = 39
-        Top = 144
+        Left = 448
+        Height = 41
+        Top = 156
         Width = 70
         Caption = 'tan'
         TabOrder = 16
         OnClick = TangenteClick
       end
       object XExponencial2: TButton
-        Left = 520
-        Height = 39
-        Top = 144
+        Left = 536
+        Height = 40
+        Top = 107
         Width = 70
         Caption = 'x^2'
         TabOrder = 17
         OnClick = XExponencial2Click
       end
       object Um: TButton
-        Left = 80
-        Height = 38
-        Top = 193
+        Left = 96
+        Height = 41
+        Top = 156
         Width = 70
         Caption = '1'
         TabOrder = 18
         OnClick = UmClick
       end
       object Dois: TButton
-        Left = 168
+        Left = 184
         Height = 39
-        Top = 192
+        Top = 157
         Width = 70
         Caption = '2'
         TabOrder = 19
         OnClick = DoisClick
       end
       object Tres: TButton
-        Left = 256
+        Left = 272
         Height = 39
-        Top = 193
+        Top = 157
         Width = 70
         Caption = '3'
         TabOrder = 20
         OnClick = TresClick
       end
       object Subtracao: TButton
-        Left = 432
-        Height = 39
-        Top = 193
+        Left = 360
+        Height = 41
+        Top = 157
         Width = 70
         Caption = '-'
         TabOrder = 21
         OnClick = SubtracaoClick
       end
       object RaizYesimaX: TButton
-        Left = 432
-        Height = 39
-        Top = 240
+        Left = 448
+        Height = 40
+        Top = 204
         Width = 70
         Caption = 'x^1/y'
         TabOrder = 22
         OnClick = RaizYesimaXClick
       end
       object RaizQuadradaX: TButton
-        Left = 520
-        Height = 40
-        Top = 192
+        Left = 534
+        Height = 41
+        Top = 157
         Width = 70
         Caption = '√ x'
         TabOrder = 23
         OnClick = RaizQuadradaXClick
       end
       object Zero: TButton
-        Left = 80
+        Left = 96
         Height = 39
-        Top = 240
+        Top = 205
         Width = 70
         Caption = '0'
         TabOrder = 24
         OnClick = ZeroClick
       end
       object TrocaSinal: TButton
-        Left = 168
+        Left = 184
         Height = 39
-        Top = 240
+        Top = 206
         Width = 70
         Caption = '+/-'
         TabOrder = 25
         OnClick = TrocaSinalClick
       end
       object Virgula: TButton
-        Left = 256
+        Left = 272
         Height = 39
-        Top = 240
+        Top = 206
         Width = 70
         Caption = ','
         TabOrder = 26
         OnClick = VirgulaClick
       end
       object Adicao: TButton
-        Left = 344
+        Left = 360
         Height = 39
-        Top = 240
+        Top = 206
         Width = 70
         Caption = '+'
         TabOrder = 27
         OnClick = AdicaoClick
       end
       object Igual: TButton
-        Left = 520
-        Height = 39
-        Top = 240
+        Left = 534
+        Height = 40
+        Top = 205
         Width = 70
         Caption = '='
         TabOrder = 28
         OnClick = IgualClick
       end
       object Pi: TButton
-        Left = 0
-        Height = 39
-        Top = 144
+        Left = 8
+        Height = 40
+        Top = 106
         Width = 70
         Caption = 'pi'
         TabOrder = 29
         OnClick = PiClick
       end
       object AbrirParentese: TButton
-        Left = 0
-        Height = 39
-        Top = 240
+        Left = 8
+        Height = 41
+        Top = 157
         Width = 70
         Caption = '('
         TabOrder = 30
         OnClick = AbrirParenteseClick
       end
       object FecharParentese: TButton
-        Left = 0
-        Height = 39
-        Top = 192
+        Left = 8
+        Height = 38
+        Top = 206
         Width = 70
         Caption = ')'
         TabOrder = 31
         OnClick = FecharParenteseClick
       end
       object Button1: TButton
-        Left = 0
+        Left = 8
         Height = 39
-        Top = 96
+        Top = 62
         Width = 70
         Caption = 'e'
         TabOrder = 32
@@ -418,10 +419,10 @@ object Calculator: TCalculator
       end
     end
     object Display: TEdit
-      Left = 24
+      Left = 16
       Height = 27
       Top = 24
-      Width = 592
+      Width = 616
       Alignment = taRightJustify
       Color = clGreen
       Font.CharSet = ANSI_CHARSET
