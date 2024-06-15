@@ -22,7 +22,7 @@
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="UnidadeCalculadora"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="960"/>
+        <TopLine Value="1170"/>
         <CursorPos X="92" Y="974"/>
         <UsageCount Value="92"/>
         <Loaded Value="True"/>
@@ -65,6 +65,11 @@
         <CursorPos X="3" Y="1266"/>
         <UsageCount Value="21"/>
         <Loaded Value="True"/>
+      </Unit>
+      <Unit>
+        <Filename Value="..\..\..\CalculadoraAssemblyTeste\Calculadora.lpr"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="10"/>
       </Unit>
     </Units>
     <JumpHistory HistoryIndex="29">
