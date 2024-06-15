@@ -1,7 +1,6 @@
 Nomes: Kauan dos Santos Loche e Rodrigo Isao Goto
 
-Obs1: Não sabíamos se o não envio de alguns arquivos iriam afetar a visualização do formulário/interface gráfica, por isto enviamos todos os gerados;
-Obs2: Projeto feito totalmente na versão do Lazarus para Windows, por isto não conseguimos trocar as cores dos labels dos botões, como na versão para Linux.
+Obs: Projeto feito totalmente na versão do Lazarus para Windows, por isto não conseguimos trocar as cores dos labels dos botões, como na versão para Linux.
 
 Instruções para utilização:
 - Se quiser apenas usar a calculadora, rode o arquivo "Calculadora" do tipo "Application" de aproximadamente 25KB;
